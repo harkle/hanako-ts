@@ -3,6 +3,10 @@ import { Collection } from '../Collection';
 export type GenericElement = Window | Document | HTMLElement | Element | Node;
 export type Selector = string | EventTarget | HTMLCollection | NodeList | GenericElement | GenericElement[] | ArrayLike<GenericElement> | Collection;
 
+export type GenericEvent = Event & MouseEvent & KeyboardEvent & WheelEvent & TouchEvent;
+export type EventCallback = (event: GenericEvent, item: Collection) => void
+
+
 export interface Point {
   x?: number,
   y?: number

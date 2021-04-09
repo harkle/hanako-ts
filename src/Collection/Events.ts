@@ -1,6 +1,6 @@
 import { Dimensions } from './Dimensions';
 import { EventManager } from '../Tools/EventManager';
-import { Elem, Selector } from './Types';
+import { Elem, Selector, EventCallback} from './Types';
 import { Collection } from '../Collection';
 
 export class Events extends Dimensions {
@@ -14,9 +14,9 @@ export class Events extends Dimensions {
    * @category Events
    * 
    */
-  public on(eventNames: string | Array<string>, callback: Function): Collection;
-  public on(eventNames: string | Array<string>, selector: Selector, callback: Function): Collection;
-  public on(eventNames: string | Array<string>, selector?: any, callback?: Function): Collection {
+  public on(eventNames: string | Array<string>, callback: EventCallback): Collection;
+  public on(eventNames: string | Array<string>, selector: Selector, callback: EventCallback): Collection;
+  public on(eventNames: string | Array<string>, selector?: any, callback?: EventCallback): Collection {
     if (typeof eventNames == 'string') eventNames = [eventNames];
     if (typeof selector == 'function') callback = selector;
 
