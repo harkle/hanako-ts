@@ -2,6 +2,7 @@
 Web quick and dirty framework to manage everyday frontend web development challenges.
 
 Demo & user friendly docs → https://harkle.github.io/hanako-ts/demo/
+
 Class and methods docs → https://harkle.github.io/hanako-ts/docs/
 
 ## Getting started
