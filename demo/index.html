@@ -1,0 +1,947 @@
+<html>
+  <head>
+    <title>Hanako TS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link href="style.css" rel="stylesheet">
+
+    <script src="dist/site-bundle.js"></script>
+    <script src="dist/animation-bundle.js"></script>
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/github.min.css" integrity="sha512-7QTQ5Qsc/IL1k8UU2bkNFjpKTfwnvGuPYE6fzm6yeneWTEGiA3zspgjcTsSgln9m0cn3MgyE7EnDNkF1bB/uCw==" crossorigin="anonymous"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+  </head>
+  <body style="padding-top: 55px;">
+    <div id="sideMenu" class="position-fixed card">
+      <div class="card-body">
+        <h5 class="card-title">The menu</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="menu">
+          <a class="navbar-brand" href="index.html">Hanako TS</a>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#section-about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section-collection">Collection</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section-network">Network</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section-helpers">Helpers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section-components">Components</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section-components-examples">Examples</a>
+            </li>
+          </ul>
+        </div>
+        <button class="btn" id="buttonToggleSideMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <section id="section-about" class="section col-12 mb-5">
+          <h1 class="my-5">About</h1>
+          <p><code><strong>Hanako TS</strong></code> is a lighweight Typescript framework to <strong>manipulate DOM</strong>. It also offers a simple way of <strong>organizing website code</strong> around "components". Its behaviour ($ shortcut, chaining, events, etc.) is heavily based on the greate <strong>jQuery</strong>.</p>
+          <p>Its easy to use <code><strong>Boostrap 5</strong></code> and <code><strong>Three.js</strong></code> inside of your project.</p>
+          <p>You are free to use it under <strong>MIT License</strong>.</p>
+          <h2>Documentation</h2>
+          <p>For a complete informations on Class, Methods, etc. please read documentation on <code>/docs/</code> folder</p>
+        </section>
+        <section id="section-collection" class="section col-12 mb-5">
+          <h1 class="my-5">Collection</h1>
+          <p>A <code>Collection</code> is a set of <code>HTMLElement</code>, <code>Nodes</code>, etc. It offers a lot of function for iteration, traversing, manipulation, css, events, etc.</p>
+          <p class="jump-to">
+            Jump to
+            <a href="#selector">Selector</a>,
+            <a href="#manipulation">Manipulation</a>,
+            <a href="#traversing">Traversing</a>,
+            <a href="#html">HTML</a>,
+            <a href="#css">CSS</a>,
+            <a href="#dimensions">Dimensions</a>,
+            <a href="#events">Events</a>
+          </p>
+          <h2 class="mb-3" id="selector">Selector</h2>
+
+          <p><code>Collection</code> accept the following elements as selector:</p>
+          <ul>
+            <li>Any valid CSS selector</li>
+            <li>
+              <code>HTMLCollection</code>, <code>NodeList</code>, <code>GenericElement</code>, <code>GenericElement[]</code>
+            </li>
+            <li>An other <code>Collection</code> (dupliacate a <code>Collection</code>)</li>
+            <li>No arguments (create an empty <code>Collection</code>)</li>
+          </ul>
+
+          <pre class="highlight"><code class="ts">const element1: Collection = new Collection('any-valid-css-selector'); // default method
+const element2: Collection = $('any-valid-css-selector'); // $ shortcut
+const element3: Collection = $(anOtherHTMLElement);</code></pre>
+<p>Of course functions can be chained. They always return the <code>Collection</code> item (except for value getter function).</p>
+<pre class="highlight"><code class="ts">$('any-valid-css-selector').prev().css('color', 'red').on('click', () => { ... });</code></pre>
+  
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;p id="selector-demo"&gt;I'm a paragraph with an some &lt;code id="selector-demo"&gt;&lt;/code&gt;&lt;/p></code></pre>
+          <div class="bd-example mb-3">
+            <p id="selector-demo">I'm a paragraph with an <code>id="selector-demo"</code></p>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="selector-console" class="nohighlight">Please open browser console and look at "Selector demo" group for detailed console.log()<br></code></pre>
+          </div>
+
+          <h2 class="mt-5 mb-3" id="manipulation">Manipulation</h2>
+          <p>A <code>Collection</code> is a list of <code>Elem</code> (whatever HTMLElement ot HTMLxxxElement) than can be manipulated in various ways.</p>
+          <pre class="highlight"><code class="ts">$('selector').length; // items count
+$('selector').forEach((item: Elem) => { ... }); // looping collection's item as Elem
+$('selector').each((item: Collection) => { ... }); // looping collection's item as Collection
+$('selector').get(index); // get a single Elem
+$('selector').add(item);  // add a new Elem
+$('selector').search('selector'); // search of element matching selector in collection</code></pre>
+
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;p id="manipulation-demo"&gt;I'm a paragraph with an some &lt;em&gt;italic&lt;/em&gt;, &lt;strong>Bold&lt;/strong&gt; and &lt;span&gt;span items&lt;/span&gt;&lt;/p></code></pre>
+
+          <div class="bd-example mb-3">
+            <p id="manipulation-demo">I'm a paragraph with an some <em>italic</em>, <strong>Bold</strong> and <span>span items</span></p>
+          </div>
+
+          <div class="bd-example terminal mb-3">
+            <pre><code id="manipulation-console" class="nohighlight">Please open browser console and look at "Manipulation demo" group for detailed console.log()<br></code></pre>
+          </div>
+
+
+          <h2 class="mt-5 mb-3" id="#traversing">Traversing</h2>
+          <p><code>Collection</code> offers various functions to traverse DOM nodes</p>
+          <pre class="highlight"><code class="ts">$('selector').prev(); // get previous element of first element in collection
+$('selector').next(); // get next element of first element in collection
+$('selector').parent(); // get parent element of first element in collection
+$('selector').parents('selector'); // get parents matching selector of first element in collection
+$('selector').find('selector'); // get descendents marching selector of first element in collection</code></pre>
+
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;p id="traversing-demo"&gt;
+  &lt;span class="first">First&lt;/span&gt;
+  &lt;span class="second"&gt;
+    &lt;em&gt;Second&lt;/em&gt;
+  &lt;/span&gt;
+  &lt;span class="third"&gt;Third&lt;/span&gt;
+&lt;/p&gt;</code></pre>
+          <div class="bd-example mb-3">
+            <p id="traversing-demo"><span class="first">First</span> <span class="second"><em>Second</em></span> <span class="third">Third</span></p>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="traversing-console" class="nohighlight">Please open browser console and look at "Traversing demo" group for detailed console.log()<br></code></pre>
+          </div>
+
+          <h2 class="mt-5 mb-3" id="html">HTML</h2>
+          <p><code>Collection</code> offers various functions to manipulate HTML nodes</p>
+          <pre class="highlight"><code class="ts">$('selector').remove(); // detach all elements in collection from DOM
+$('selector').empty(); // empty all elements in collection
+$('selector').prepend(item); // prepend a element to the first element in collection
+$('selector').append(item); // append a element to the first element in collection
+$('selector').wrap(item); // wrap all elements in collection with a the specified element
+$('selector').html(); // get the html content of the first element in collection
+$('selector').html('content'); // set the html content of all element in collection
+$('selector').text(); // get the text content of the first element in collection
+$('selector').text('content'); // set the text content of all element in collection
+$('selector').attr('name'); // get the named attribue value of the first element in collection
+$('selector').attr('name', 'value'); // set the named attribute value of the first element in collection
+$('selector').removeAttr('name'); // remove the named attribute of all elements in collection
+$('selector').data('name'); // get the named data value of the first element in collection
+$('selector').data('name', 'value'); // set the data attribute value of the first element in collection</code></pre>
+      
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;p id="html-demo"&gt;
+  &lt;strong class=&quot;to-prepend&quot;&gt;prepend&lt;/strong&gt;
+  &lt;strong class=&quot;to-append&quot;&gt;append&lt;/strong&gt;
+  &lt;div class=&quot;wrapper text-warning&quot;&gt;&lt;/div&gt;
+  &lt;div&gt;1: nothing &lt;span&gt;Test&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;remove&quot; data-id=&quot;1&quot;&gt;2: remove&lt;/div&gt;
+  &lt;div class=&quot;remove&quot; data-id=&quot;2&quot;&gt;2: remove&lt;/div&gt;
+  &lt;div class=&quot;empty&quot;&gt;3: empty&lt;/div&gt;
+  &lt;div class=&quot;prepend&quot;&gt;4: prepend&lt;/div&gt;
+  &lt;div class=&quot;append&quot;&gt;5: append&lt;/div&gt;
+  &lt;div class=&quot;wrap&quot;&gt;6: wrap&lt;/div&gt;
+  &lt;div class=&quot;html&quot;&gt;7: html&lt;/div&gt;
+  &lt;div class=&quot;text&quot;&gt;8: text&lt;/div&gt;
+  &lt;div class=&quot;atr&quot; title=&quot;title attribute&quot; alt=&quot;attribute to remove&quot;&gt;9: attr&lt;/div&gt;
+  &lt;div class=&quot;data&quot; data-test=&quot;test dateset value&quot;&gt;10: data&lt;/div&gt;
+&lt;/p&gt;</code></pre>
+          <div class="bd-example mb-3">
+            <div id="html-demo">
+              <strong class="to-prepend">prepend</strong>
+              <strong class="to-append">append</strong>
+              <div class="wrapper text-warning"></div>
+              <div>1: nothing <span>Test</span></div>
+              <div class="remove" data-id="1">2: remove</div>
+              <div class="remove" data-id="2">2: remove</div>
+              <div class="empty">3: empty</div>
+              <div class="prepend">4: prepend</div>
+              <div class="append">5: append</div>
+              <div class="wrap">6: wrap</div>
+              <div class="html">7: html</div>
+              <div class="text">8: text</div>
+              <div class="atr" title="title attribute" alt="attribute to remove">9: attr</div>
+              <div class="data" data-test="test dateset value">10: data</div>
+            </div>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="html-console" class="nohighlight">Please open browser console and look at "HTML demo" group for detailed console.log()<br></code></pre>
+          </div>
+
+          <h2 class="mt-5 mb-3" id="css">CSS</h2>
+          <p><code>Collection</code> offers various functions to manipulate CSS classes and style attribute.</p>
+
+          <pre class="highlight"><code class="ts">$('.has-class').hasClass(className) // return true if any element in collection has specified class.
+$('.add-class').addClass(className) // Add className to all elements in collection
+$('.remove-class').removeClass(className) // Remove className on all elements in collection
+$('.toggle-class').toggleClass(className) // Toggle className on all elements in collection
+$('.css-get').css('key') // Return the CSS value of specified key of the first element in collection
+$('.css-set').css('key', 'value') // Set the specified value of specified key css key on all elements in collection
+$('.css-set').css({'key': 'value', ...}) // Set the specified key/value css on all elements in collection</code></pre>
+                  
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;p id="css-demo"&gt;
+  &lt;div class=&quot;has-class text-warning&quot;&gt;Has class text-warning?&lt;/div&gt;
+  &lt;div class=&quot;has-class&quot;&gt;Has class text-warning?&lt;/div&gt;
+  &lt;div class=&quot;add-class&quot;&gt;Add class text-warning&lt;/div&gt;
+  &lt;div class=&quot;remove-class&quot;&gt;Remove class text-warning&lt;/div&gt;
+  &lt;div class=&quot;toggle-class text-warning&quot;&gt;Toggle class text-warning&lt;/div&gt;
+  &lt;div class=&quot;toggle-class&quot;&gt;Toggle class text-warning&lt;/div&gt;
+  &lt;div class=&quot;css-get text-warning&quot;&gt;Get CSS&lt;/div&gt;
+  &lt;div class=&quot;css-set&quot;&gt;Set CSS&lt;/div&gt;
+&lt;/p&gt;</code></pre>
+          <div class="bd-example mb-3">
+            <div id="css-demo">
+              <div class="has-class-1 text-warning">Has class text-warning?</div>
+              <div class="has-class-2">Has class text-warning?</div>
+              <div class="add-class">Add class text-warning</div>
+              <div class="remove-class">Remove class text-warning</div>
+              <div class="toggle-class text-warning">Toggle class text-warning</div>
+              <div class="toggle-class">Toggle class text-warning</div>
+              <div class="css-get text-warning">Get CSS</div>
+              <div class="css-set">Set CSS</div>
+            </div>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="css-console" class="nohighlight">Please open browser console and look at "CSS demo" group for detailed console.log()<br></code></pre>
+          </div>
+
+          <h2 class="mt-5 mb-3" id="dimensions">Dimensions</h2>
+
+          <p><code>Collection</code> offers various functions to get/set element position and dimensions.</p>
+
+          <pre class="highlight"><code class="ts">$('#dimensions-test').width() // return the width of the first element in collection
+$('#dimensions-test').width('calc(100% - 175px)') // set the width of all elements in collection
+$('#dimensions-test').height() // return the height of the first element in collection
+$('#dimensions-test').height(350) // et the height of all elements in collection
+$('#dimensions-test').position() // return position {x, y} of a element relative to document
+$('#dimensions-test').position('#dimensions-reference') // return position {x, y} of a element relative to a reference Element
+$('#dimensions-test').viewportPosition() // return position {x, y} of a element relative to viewport</code></pre>
+                  
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;div id=&quot;dimension-demo&quot; class=&quot;d-flex&quot;&gt;
+  &lt;div id=&quot;dimensions-test&quot;&gt;Original width/height is 175px&lt;/div&gt;
+  &lt;div id=&quot;dimensions-reference&quot;&gt;Reference element&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <div class="bd-example mb-3">
+            <div id="dimension-demo" class="d-flex">
+              <div id="dimensions-test">Original width/height is 175px</div>
+              <div id="dimensions-reference">Reference element</div>
+            </div>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="dimension-console" class="nohighlight">Please open browser console and look at "Dimensions demo" group for detailed console.log()<br></code></pre>
+          </div>
+
+          <h2 class="mt-5 mb-3" id="events">Events</h2>
+
+          <p><code>Collection</code> offers various functions to manage events.</p>
+
+          <pre class="highlight"><code class="ts">$(window).on('resize', () => {
+  console.log($(window).width(), $(window).height());
+});
+      
+$('.button-click').on('click', (event: MouseEvent, item: Collection) => {
+  console.log((new Date()).getTime(), event, item);
+});
+
+$('.button-click-once').on('click', (event: MouseEvent, item: Collection) => {
+  console.log((new Date()).getTime(), event, item);
+  item.off('click');
+});
+
+$(document).on('click', '.button-delegate-click', (event: MouseEvent, item: Collection) => {
+  console.log((new Date()).getTime(), event, item);
+});
+
+$('.button-trigger').on('click', (event: MouseEvent, item: Collection) => {
+  console.log((new Date()).getTime(), event, item);
+  $('.button-click').trigger('click');
+});</code></pre>
+                  
+          <h4>Examples</h4>
+          <pre class="highlight"><code class="html">&lt;div class=&quot;btn-group mb-3&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button-click btn btn-outline-primary&quot;&gt;Click 1&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button-click-once btn btn-outline-primary&quot;&gt;Click only once&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button-delegate-click btn btn-outline-primary&quot;&gt;Delegate click&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;button-delegate-click btn btn-outline-primary&quot;&gt;Trigger "click 1"&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+          <div class="btn-group mb-3">
+            <button type="button" class="button-click btn btn-outline-primary">Click 1</button>
+            <button type="button" class="button-click-once btn btn-outline-primary">Click once</button>
+            <button type="button" class="button-delegate-click btn btn-outline-primary">Delegate click</button>
+            <button type="button" class="button-trigger btn btn-outline-primary">Trigger "click 1"</button>
+          </div>
+
+          <div class="bd-example terminal mb-3">
+            <pre><code id="events-console" class="nohighlight">Window resize&#9;&#9;<span id="event-resize"></span>
+Click&#9;&#9;&#9;<span id="event-click"></span>
+Click once&#9;&#9;<span id="event-click-once"></span>
+Click delegate&#9;&#9;<span id="event-click-delegate"></span>
+Trigger click&#9;&#9;<span id="event-trigger"></span></code></pre>
+          </div>
+        </section>
+        <section id="section-network" class="section col-12 mb-5">
+          <h1 class="my-5">Network</h1>
+          <p>With <code>$.httpRequest</code> you can query HTML, json or text. It uses async/await so you dont have to mess with callbacks. It support GET and POST.</p>
+          <pre class="highlight"><code class="ts">let text: string = await $.httpRequest({
+  url: 'ajax.txt',
+  dataType: 'text',
+});
+console.log(text);
+$('#ajax-target').text(text);
+
+let json: object = await $.httpRequest({
+  url: 'ajax.json',
+  dataType: 'json',
+});
+console.log(json);
+$('#ajax-target').html('');
+
+let html: Collection = await $.httpRequest({
+  url: 'ajax.html',
+  dataType: 'html',
+});
+$('#ajax-target').append(html);
+</code></pre>
+
+          <div class="btn-group mb-3">
+            <button type="button" class="button-load-text btn btn-outline-primary">Load text</button>
+            <button type="button" class="button-load-json btn btn-outline-primary">Load json</button>
+            <button type="button" class="button-load-html btn btn-outline-primary">Load HTML</button>
+          </div>
+          <div class="bd-example mb-3">
+            <div id="ajax-target">Please click on a button above.</div>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="network-console" class="nohighlight"></code></pre>
+          </div>
+        </section>
+          <section id="section-helpers" class="section col-12 mb-5">
+          <h1 class="my-5">Helpers</h1>
+
+          <p>Helpers offers some handy functions like:</p>
+
+          <h2 class="mb-3">$.ready</h2>
+          <p>Await for document ready state</p>
+          <pre class="highlight"><code class="ts">// some stuff to do before document is loaded
+await $.ready();
+// some stuff to do after document is loaded</code></pre>
+
+          <h2 class="mb-3">$.imagesLoaded</h2>
+          <p>Await for document images or set of images to be loaded</p>
+          <pre class="highlight"><code class="ts">// some stuff to do before document images are loaded
+await $.imagesLoaded();
+// some stuff to do after document images are loaded
+
+await $.imagesLoaded($('img.ajax-images'));
+// some stuff to do after a specific set of images is loaded
+// useful for ajax loaded content, ie. an ajax Carousel with some dimensions computations ;–)</code></pre>
+            
+          <h2 class="mb-3">$.scrollTo</h2>
+          <p>Scroll document to a specified position</p>
+          <pre class="highlight"><code class="ts">$.scrollTo(0);</code></pre>
+          <p>
+            <button type="button" class="button-scroll-top btn btn-outline-primary">Scroll top</button>
+          </p>
+
+          <h2 class="mb-3">$.parseHTML</h2>
+          <p>Return a <code>Collection</code> from an HTML string.</p>
+          <pre class="highlight"><code class="ts">let p: Collection = $.parseHTML('&lt;p&gt;This is a &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;');
+$('#parsehtml-target').append(p);</code></pre>
+          <div class="bd-example mb-3">
+            <div id="parsehtml-target"></div>
+          </div>
+          <div class="bd-example terminal mb-3">
+            <pre><code id="parsehtml-console" class="nohighlight"></code></pre>
+          </div>
+        </section>
+        <section id="section-components" class="section col-12 mb-5">
+          <h1 class="my-5">Components</h1>
+          <p>Compontents are the core of your website. the <code>Component</code> class allows you to organize your code in a simple way. Components can be directyl initialized in your main <code>.ts</code> file. In the example below, component folder is not inside TS folder as components may contain other files (assets, scss, etc.).</p>
+          <p>Please look at <code>/demo/</code> folder in the repo for a working example.</p>
+          <h5>Files structure</h5>
+          <pre class="highlight"><code class="text">my-website-project
+├── index.html
+├── compontents
+|   ├── MyFirstCompontent
+|   |   └── index.ts
+|   └── ...
+├── hanako-ts
+|   └── src
+└── ts
+    └── index.ts</code></pre>
+
+      <h5>MyFirstComponent/index.html</h5>
+      <pre class="highlight"><code class="ts">import { Component } from '../../hanako-ts/src/Component';
+
+export class MyFirstCompontent extends Component {
+  //you can customize constructor parameters if needed
+  constructor() {
+    // use super('Compontent name', true) if you want your compontent to be initialized after image are loaded
+    super('Compontent name', false);
+
+    // to some stuff
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+    
+    // to some stuff
+
+    this.success();
+  }
+
+  // add methods here
+}</code></pre>
+      <h5>index.ts</h5>
+      <pre class="highlight"><code class="ts">import { MyFirstCompontent } from '../components/MyFirstCompontent';
+        
+(new MyFirstCompontent()).init();</code></pre>
+        </section>
+        <section id="section-components-examples" class="section col-12 mb-5">
+          <h1 class="mb-3">Components examples</h1>
+          <p class="jump-to">
+            Jump to
+            <a href="#menu">Menu</a>,
+            <a href="#scrollspy">Scrollspy</a>,
+            <a href="#filtering">Filtering</a>,
+            <a href="#carsouel">Boostrap Carsouel</a>,
+            <a href="#audioplayer">Audio Player</a>,
+            <a href="#graphicengine">Graphic Engine</a>,
+          </p>
+
+          <h2 class="mb-3" id="menu">Menu</h2>
+          <p>Compontent used in this page to toggle the fake menu (top right burger).</p>
+
+          <h5>Menu/index.html</h5>
+          <pre class="highlight"><code class="ts">import { $ } from '../../../src/Framework';
+import { Collection } from '../../../src/Collection';
+import { Component } from '../../../src/Component';
+
+export class Menu extends Component {
+  private triggerElementName: string;
+  private menuElementName: string;
+  private triggerElement: Collection;
+  private menuElement: Collection;
+
+  constructor(triggerElementName: string, menuElementName: string) {
+    super('Menu', false);
+
+    this.triggerElementName = triggerElementName;
+    this.menuElementName = menuElementName;
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+    
+    this.triggerElement = $(this.triggerElementName)
+    this.menuElement = $(this.menuElementName);
+
+    if (this.triggerElement.length == 0|| this.menuElement.length == 0) {
+      this.warning('missing `triggerElement` or `menuElement`');
+    } else {
+      this.triggerElement.on('click', (event: Event) => {
+        event.preventDefault();
+  
+        this.triggerElement.toggleClass('active');
+        this.menuElement.toggleClass('active');
+      });  
+
+      this.success();
+    }
+  }
+}</code></pre>
+
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { Menu } from '../components/Menu';
+
+(new Menu('#buttonToggleSideMenu', '#sideMenu')).init();</code></pre>
+
+          <h2 class="mb-3" id="Scrollspy">Scrollspy</h2>
+          <p>Compontent used in this page to handle scrollSpy menu.</p>
+          <h5>Scrollspy/index.ts</h5>
+          <pre class="highlight"><code class="ts">import { $ } from '../../../src/Framework';
+import { Collection } from '../../../src/Collection';
+import { Elem } from '../../../src/Collection/Types';
+import { Component } from '../../../src/Component';
+
+export class ScrollSpy extends Component {
+  private menuElementName: string;
+  private sectionClass: string;
+  private link: Collection;
+  private sections: Collection;
+  private headerHeight: number;
+
+  constructor(menuElementName: string, sectionClass: string, headerHeight: number) {
+    super('ScrollSpyComponent', false);
+
+    this.menuElementName = menuElementName;
+    this.sectionClass = sectionClass;
+    this.headerHeight = headerHeight;
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+    
+    this.link = $(this.menuElementName + ' a');
+    this.sections = $(this.sectionClass);
+
+    if (this.link.length == 0 || this.sections.length == 0) {
+      this.warning('missing `link` or `sections`');
+    } else {
+
+      $(window).on('scroll', () => {
+        this.spy();
+      });
+
+      this.spy();
+      this.success();
+    }
+
+    this.link.on('click', (event: Event) => {
+      event.preventDefault();
+
+      var target: Collection = $($(event.target).attr('href'));
+      var top: number = (target.get(0) === this.sections.get(0)) ? 0 : target.position().y - this.headerHeight + 1;
+
+      $.scrollTo(top);
+    });
+  }
+
+  public spy(): void {
+    var currentID = '';
+
+    this.sections.forEach((section: Elem) => {
+      if (section.getBoundingClientRect().y <= this.headerHeight) currentID = $(section).attr('id');
+    });
+
+    if (currentID) {
+      this.link.removeClass('active').search('[href="#' + currentID + '"]').addClass('active');
+    }
+  }
+}</code></pre>
+
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { ScrollSpy } from '../components/ScrollSpy';
+                        
+(new ScrollSpy('#menu', '.section', 55)).init();</code></pre>
+
+          <h2 class="mb-3" id="filtering">Filtering</h2>
+          <p>Some basic item filtering user dataset</p>
+          <div class="filters btn-group">
+            <a href="#" data-id="0" class="btn btn-primary active">All</a>
+            <a href="#" data-id="1" class="btn btn-primary">Red</a>
+            <a href="#" data-id="2" class="btn btn-primary">Green</a>
+            <a href="#" data-id="3" class="btn btn-primary">Blue</a>
+          </div>
+          <div class="list mt-1 mb-3">
+            <span class="badge element active bg-danger" data-id="1">Red</span>
+            <span class="badge element active bg-danger" data-id="1">Red</span>
+            <span class="badge element active bg-success" data-id="2">Green</span>
+            <span class="badge element active bg-primary" data-id="3">Blue</span>
+          </div>
+
+          <h5>Filters/index.ts</h5>
+          <pre class="highlight"><code class="ts">import { $ } from '../../../src/Framework';
+import { Collection } from '../../../src/Collection';
+import { Component } from "../../../src/Component";
+
+export class Filters extends Component {
+  private filtersElementName: string;
+  private contentElementName: string;
+  private filtersElements: Collection;
+  private allowMultiSelection: boolean;
+  private elements: Collection;
+  private idsToFilter: Array<number> = [];
+
+  constructor(filtersElementName: string, contentElementName: string, allowMultiSelection: boolean) {
+    super('Filters', false);
+
+    this.filtersElementName = filtersElementName;
+    this.contentElementName = contentElementName;
+    this.allowMultiSelection = allowMultiSelection;
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+  
+    this.filtersElements = $(this.filtersElementName + ' a');
+    this.elements = $(this.contentElementName + ' .element');
+
+    if (this.filtersElements.length == 0 || this.elements.length == 0) {
+      this.warning('missing `filtersElement` or `contentElement`');
+    } else {
+      this.filtersElements.on('click', (event: Event) => {
+        event.preventDefault();
+
+        this.filterClickHandler($(event.target));
+      });
+
+      this.success();
+    }
+  }
+
+  private filterClickHandler(filterElement: Collection) {
+    const elementID: number = +filterElement.data('id');
+
+    /* all clicked =>  restore */
+    if (elementID == 0) {
+      this.idsToFilter = [];
+
+      this.elements.addClass('active');
+
+      return;
+    }
+
+    /* deactivate filter if active */
+    if (filterElement.hasClass('active')) {
+      filterElement.removeClass('active');
+
+      const index = this.idsToFilter.indexOf(elementID, 0);
+      if (index > -1) {
+        this.idsToFilter.splice(index, 1);
+      }
+
+      if (this.idsToFilter.length == 0)  this.filtersElements.search('[data-id="0"]').addClass('active')
+    } else {
+      /* deactivate all filter */
+      if (!this.allowMultiSelection) {
+        this.idsToFilter = [];
+
+        this.filtersElements.removeClass('active');
+      }
+
+      /* activate the clicked one */
+      filterElement.addClass('active');
+
+      this.idsToFilter.push(elementID);
+    }
+
+    this.filterElements();
+  }
+
+  private filterElements(): void {
+    /* show all element */
+    if (this.idsToFilter.length == 0) {
+      this.elements.addClass('active');
+
+      return;
+    }
+
+    /* hide all element */
+    this.elements.removeClass('active');
+
+    /* ID provided, filters elements */
+    this.idsToFilter.forEach(id => {
+      $(this.contentElementName + ' .element[data-id="' + id + '"]').addClass('active')
+    });
+  }
+}</code></pre>
+
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { Filters } from '../components/Filters';
+
+(new Filters('.filters', '.list', false)).init();</code></pre>
+
+          <h2 class="mb-3" id="carousel">Boostrap Carsouel</h2>
+          <p>You can use boostrap javascript in your code (<code>npm install bootstrap</code>, <code>npm install @types/bootstrap</code>).</p>
+
+          <div id="carouselExampleIndicators" class="carousel slide mb-3 w-50" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+              <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+              <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </a>
+          </div>
+
+          <h5>Carsouel/index.ts</h5>
+          <pre class="highlight"><code class="ts">import { $ } from '../../../src/Framework';
+import { Elem } from '../../../src/Collection/Types';
+import { Component } from '../../../src/Component';
+import BS_Carousel from 'bootstrap/js/dist/carousel';
+
+export class Carousel extends Component {
+
+  constructor() {
+    super('Carousel', true);
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+    
+    $('.carousel').forEach((carousel: Elem) => {
+      new BS_Carousel(carousel);
+
+      // here you can add events or whatever
+    });
+
+    this.success();
+  }
+}</code></pre>
+
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { Carousel } from '../components/Carousel';
+
+(new Carousel()).init();</code></pre>
+
+          <h2 class="mb-3" id="audioplayer">Audio Player</h2>
+          <p>Audio player component (no need to modify its source code) offers a HTML/CSS customizable audio player.</p>
+          <p><small><em>Music sample: Dupe Dodging by Speck (c) copyright 2021 Licensed under a Creative Commons Attribution Noncommercial  (3.0) license. http://dig.ccmixter.org/files/speck/63463 Ft: Martijn de Boer</em></small></p>
+
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { AudioPlayers } from '../components/AudioPlayers';
+
+(new AudioPlayers()).init();</code></pre>
+
+          <h4>Default</h4>
+          <p>Every <code>&lt;audio&gt;</code> tag with class <code>.ht-audio-player</code> is automatically initized in the component.</p>
+          <pre class="highlight"><code class="html">&lt;audio class="ht-audio-player" src="some.mp3" &gt;&lt;/audio&gt;</code></pre>
+          <audio src="http://ccmixter.org/content/speck/speck_-_Dupe_Dodging.mp3" preload="metadata" class="ht-audio-player"></audio>
+
+          <h4 class="mt-3">Custom HTML</h4>
+          <pre class="highlight"><code class="html">&lt;div class=&quot;ab-audio-player-container&quot;&gt;
+  &lt;audio src=&quot;http://ccmixter.org/content/speck/speck_-_Dupe_Dodging.mp3&quot; preload=&quot;metadata&quot; class=&quot;ht-audio-player&quot;&gt;&lt;/audio&gt;
+  &lt;button class=&quot;button-play-pause&quot; data-status=&quot;paused&quot;&gt;Play&lt;/button&gt;
+  &lt;input type=&quot;range&quot; value=&quot;0&quot; class=&quot;slider-seek&quot;&gt;
+  &lt;div class=&quot;indicators&quot;&gt;
+    &lt;span class=&quot;label-current-time&quot;&gt;0:00&lt;/span&gt;
+    &lt;span class=&quot;label-duration&quot;&gt;0:00&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;button-mute&quot; data-status=&quot;unmuted&quot;&gt;Mute&lt;/button&gt;
+  &lt;input type=&quot;range&quot; value=&quot;100&quot; min=&quot;0&quot; max=&quot;100&quot; class=&quot;slider-volume&quot;&gt;
+&lt;/div&gt;</code></pre>
+
+          <div class="ab-audio-player-container">
+            <audio src="http://ccmixter.org/content/speck/speck_-_Dupe_Dodging.mp3" preload="metadata" class="ht-audio-player"></audio>
+            <button class="button-play-pause" data-status="paused">Play</button>
+            <input type="range" value="0" class="slider-seek">
+            <div class="indicators">
+              <span class="label-current-time">0:00</span>
+              <span class="label-duration">0:00</span>
+            </div>
+            <button class="button-mute" data-status="unmuted">Mute</button>
+            <input type="range" value="100" min="0" max="100" class="slider-volume">
+          </div>
+
+          <h4 class="mt-3">Programmatical</h4>
+          <p>Create a blind player that can be programmatical contoled</p>
+          <p>
+            <button id="play-audio" class="btn btn-outline-primary">Play</button>
+            <button id="pause-audio" class="btn btn-outline-primary">Pause</button>
+          </p>
+          <pre class="highlight"><code class="ts">let audioPlayer: AudioPlayer = new AudioPlayer('some.mp3');
+
+$('#play-audio').on('click', () => {
+  audioPlayer.play();
+});
+
+$('#pause-audio').on('click', () => {
+  audioPlayer.pause();
+});</code></pre>
+
+          <h2 class="mb-3" id="graphicengine">Graphic Engine</h2>
+          <p><code>GraphicEngine</code> offers a way to create canvas animation with <code>GraphiEngine2D</code> class or with Three.js using <code>GraphigEngine3D</code> class.</p>
+          <p>It offers methos such as <code>setup()</code>, <code>animate()</code>, <code>draw()</code> to place your code.</p>
+          <h4>Canvas 2D</h4>
+
+          <canvas id="canvas-2d" class="mb-3"></canvas>
+
+          <pre class="highlight"><code class="html">&lt;canvas id="canvas-2d"&gt;&lt;/canvas&gt;</code></pre>
+
+          <h5>Animation2D/index.ts</h5>
+          <pre class="highlight"><code class="ts">import { GraphicEngineOptions } from "../../../src/GraphicEngine/GraphicEngine";
+import { Selector } from '../../../src/Collection/Types';
+import { GraphicEngine2D } from "../../../src/GraphicEngine/GraphicEngine2D";
+import { Component } from '../../../src/Component';
+
+class Animation extends GraphicEngine2D {
+  private imageData: ImageData;
+  private buffer: Uint32Array;
+  private alphaLimit: number;
+  private waveCounter: number;
+
+  constructor(selector: Selector, options?: GraphicEngineOptions) {
+    super(selector, options);
+  }
+
+  public setup() {
+    this.imageData = this.context.createImageData(this.bufferDimensions.width, this.bufferDimensions.height);
+    this.buffer = new Uint32Array(this.imageData.data.buffer);
+    this.alphaLimit = .5;
+    this.waveCounter = 0;
+
+    const increase = Math.PI * 2 / 100;
+    setInterval(() => {
+      this.alphaLimit = Math.sin(this.waveCounter) / 2 + .5;
+
+      this.waveCounter += increase;
+    }, 40);
+
+    setInterval(() => {
+      let len: number = this.buffer.length - 1;
+      while (len--) this.buffer[len] = Math.random() < this.alphaLimit ? 0 : 0xffffffff;
+    }, 40);
+  }
+
+  public animate() {
+  }
+
+  public draw() {
+    this.context.putImageData(this.imageData, 0, 0);
+  }
+}
+
+export class Animation2D extends Component {
+
+  constructor() {
+    super('Animation2D', true);
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+
+    const canvas2D = new Animation('#canvas-2d', { width: 640, height: 480, pixelRatio: 1 });
+
+    this.success();
+  }
+}</code></pre>
+
+          <h5>Animation3D/index.ts</h5>
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { Animation2D } from '../components/Animation2D';
+
+(new Animation2D()).init();</code></pre>
+
+          <h4 class="mb-3">Three.js</h4>
+          <p>Exemple with Three.js. <code>npm install three</code>, <code>npm install @type/three</code></p>
+          <p>If you are working with Webpack and because Three.js is heavy, I recommand to create a separate entry point for this component.</p>
+
+          <canvas id="canvas-3d"></canvas>
+          
+          <pre class="highlight"><code class="html">&lt;canvas id="canvas-3d"&gt;&lt;/canvas&gt;</code></pre>
+
+          <h5>Animation3D/index.ts</h5>
+          <pre class="highlight"><code class="ts">import { GraphicEngineOptions } from "../../../src/GraphicEngine/GraphicEngine";
+import { Selector } from '../../../src/Collection/Types';
+import { GraphicEngine3D } from '../../../src/GraphicEngine/GraphicEngine3D';
+import { BoxGeometry } from 'three/src/geometries/BoxGeometry';
+import { MeshBasicMaterial } from 'three/src/materials/MeshBasicMaterial';
+import { Mesh } from 'three/src/objects/Mesh';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { Component } from '../../../src/Component';
+import { Color } from "three";
+
+class Animation extends GraphicEngine3D {
+  private cube: Mesh;
+  private controls: OrbitControls;
+
+  constructor(selector: Selector, options?: GraphicEngineOptions) {
+    super(selector, options);
+  }
+
+  public setup() {
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    
+    const geometry: BoxGeometry = new BoxGeometry();
+    const material: THREE.MeshBasicMaterial = new MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+
+    this.cube = new Mesh(geometry, material)
+
+    this.scene.add(this.cube);
+
+    this.camera.position.z = 5;
+
+    this.renderer.setClearColor(new Color(0x000000), 0)
+  }
+
+  public animate() {
+    this.cube.rotation.x += .01;
+    this.cube.rotation.y += .01;
+
+    this.controls.update();
+  }
+
+  public draw() {
+  }
+}
+
+export class Animation3D extends Component {
+
+  constructor() {
+    super('Animation3D', true);
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+    
+    new Animation('#canvas-3d', {width: 640, height: 480, alpha: true});
+
+    this.success();
+  }
+}</code></pre>
+
+          <h5>index.ts</h5>
+          <pre class="highlight"><code class="ts">import { Animation3D } from '../components/Animation3D';
+
+(new Animation3D()).init();</code></pre>
+        </section>
+      </div>
+    </div>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

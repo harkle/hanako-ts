@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+      "noImplicitAny": true,
+      "target": "ES6",
+      "module": "ES2015",
+      "moduleResolution": "Node",
+      "lib": ["es2017", "dom"]
+  },
+  "typedocOptions": {
+    "entryPoints": ["src/Collection.ts", "src/Tools/Helpers.ts", "src/Component.ts", "src/GraphicEngine/GraphicEngine.ts"],
+    "out": "docs"
+  }
+}
