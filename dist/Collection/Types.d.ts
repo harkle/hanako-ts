@@ -1,7 +1,7 @@
 import { Collection } from '../Collection';
 export declare type GenericElement = Window | Document | HTMLElement | Element | Node;
 export declare type Selector = string | EventTarget | HTMLCollection | NodeList | GenericElement | GenericElement[] | ArrayLike<GenericElement> | Collection;
-export declare type GenericEvent = Event & MouseEvent & KeyboardEvent & WheelEvent & TouchEvent;
+export declare type GenericEvent = Event & MouseEvent & KeyboardEvent & WheelEvent & TouchEvent & PopStateEvent;
 export declare type EventCallback = (event: GenericEvent, item: Collection) => void;
 export interface Point {
     x?: number;
