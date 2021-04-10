@@ -26,7 +26,6 @@ You can also use inside your project `hanako-ts` directly from source.
 git clone https://github.com/harkle/hanako-ts.git
 ```
 
-
 ## Integrate in your project
 
 - Install via npm or Clone the repository in your project

@@ -25,7 +25,7 @@
   },
   "scripts": {
     "compile": "webpack --config webpack.config.js",
-    "build": "tsc --project tsconfig.npm.json"
+    "build": "tsc --project tsconfig.npm.es2015.json && tsc --project tsconfig.npm.es2020.json"
   },
   "author": {
     "name": "Lionel Tardy",
