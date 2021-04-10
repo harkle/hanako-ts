@@ -1,11 +1,15 @@
 {
   "name": "hanako-ts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Web quick and dirty framework to manage everyday frontend web development challenges.",
+  "homepage": "https://github.com/harkle/hanako-ts",
+  "bugs": {
+    "url": "https://github.com/harkle/hanako-ts/issues"
+  },
   "devDependencies": {
     "@popperjs/core": "^2.9.1",
     "@types/bootstrap": "^5.0.8",
+    "@types/node": "^14.14.37",
     "@types/three": "^0.127.0",
     "bootstrap": "^5.0.0-beta2",
     "eslint": "^7.21.0",
@@ -13,6 +17,7 @@
     "three": "^0.127.0",
     "three-orbit-controls": "^82.1.0",
     "ts-loader": "^8.0.17",
+    "ts-node": "^9.1.1",
     "typedoc": "^0.20.35",
     "typescript": "^4.2.3",
     "webpack": "^4.46.0",
@@ -20,9 +25,13 @@
   },
   "scripts": {
     "compile": "webpack --config webpack.config.js",
-    "serve": "webpack-dev-server"
+    "build": "tsc --project tsconfig.npm.json"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Lionel Tardy",
+    "email": "mail@lionel.me",
+    "url": "https://github.com/harkle"
+  },
+  "license": "MIT",
   "dependencies": {}
 }
