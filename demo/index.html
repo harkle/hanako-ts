@@ -29,6 +29,9 @@
               <a class="nav-link active" aria-current="page" href="#section-about">About</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="#section-components">Components</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#section-collection">Collection</a>
             </li>
             <li class="nav-item">
@@ -36,9 +39,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#section-helpers">Helpers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#section-components">Components</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#section-components-examples">Examples</a>
@@ -58,8 +58,59 @@
           <p>Its easy to use <code><strong>Boostrap 5</strong></code> and <code><strong>Three.js</strong></code> inside of your project.</p>
           <p>You are free to use it under <strong>MIT License</strong>.</p>
           <h2>Documentation</h2>
-          <p>For a complete informations on Class, Methods, etc. please read documentation on <code>/docs/</code> folder</p>
+          <p>For a complete informations on Class, Methods, etc. please read documentation on <code>/docs/</code> folder.</p> 
         </section>
+
+        <section id="section-components" class="section col-12 mb-5">
+          <h1 class="my-5">Components</h1>
+          <p>Compontents are the core of your website. the <code>Component</code> class allows you to organize your code in a simple way. Components can be directyl initialized in your main <code>.ts</code> file. In the example below, component folder is not inside TS folder as components may contain other files (assets, scss, etc.).</p>
+          
+          <h5>Files structure</h5>
+          <pre class="highlight"><code class="shell">my-website-project
+├── index.html
+├── compontents
+|   ├── MyFirstCompontent
+|   |   └── index.ts
+|   └── ...
+└── ts
+    └── index.ts</code></pre>
+
+    <h5>Install hanako</h5>
+          <p>First of all you need to install Hanako framework</p>
+          <p>
+            <pre class="highlight"><code class="shell">npm init
+npm install hanako-ts --save-dev</code></pre>
+          </p>
+
+      <h5>MyFirstComponent/index.html</h5>
+      <pre class="highlight"><code class="ts">import { Component } from 'hanako-ts/dist/Component';
+
+export class MyFirstCompontent extends Component {
+  //you can customize constructor parameters if needed
+  constructor() {
+    // use super('Compontent name', true) if you want your compontent to be initialized after image are loaded
+    super('Compontent name', false);
+
+    // to some stuff
+  }
+
+  public async init(): Promise<void> {
+    await super.init();
+    
+    // to some stuff
+
+    this.success();
+  }
+
+  // add methods here
+}</code></pre>
+      <h5>index.ts</h5>
+      <pre class="highlight"><code class="ts">import { MyFirstCompontent } from '../components/MyFirstCompontent';
+        
+(new MyFirstCompontent()).init();</code></pre>
+        </section>
+
+
         <section id="section-collection" class="section col-12 mb-5">
           <h1 class="my-5">Collection</h1>
           <p>A <code>Collection</code> is a set of <code>HTMLElement</code>, <code>Nodes</code>, etc. It offers a lot of function for iteration, traversing, manipulation, css, events, etc.</p>
@@ -388,49 +439,6 @@ $('#parsehtml-target').append(p);</code></pre>
           <div class="bd-example terminal mb-3">
             <pre><code id="parsehtml-console" class="nohighlight"></code></pre>
           </div>
-        </section>
-        <section id="section-components" class="section col-12 mb-5">
-          <h1 class="my-5">Components</h1>
-          <p>Compontents are the core of your website. the <code>Component</code> class allows you to organize your code in a simple way. Components can be directyl initialized in your main <code>.ts</code> file. In the example below, component folder is not inside TS folder as components may contain other files (assets, scss, etc.).</p>
-          <p>Please look at <code>/demo/</code> folder in the repo for a working example.</p>
-          <h5>Files structure</h5>
-          <pre class="highlight"><code class="text">my-website-project
-├── index.html
-├── compontents
-|   ├── MyFirstCompontent
-|   |   └── index.ts
-|   └── ...
-├── hanako-ts
-|   └── src
-└── ts
-    └── index.ts</code></pre>
-
-      <h5>MyFirstComponent/index.html</h5>
-      <pre class="highlight"><code class="ts">import { Component } from '../../hanako-ts/src/Component';
-
-export class MyFirstCompontent extends Component {
-  //you can customize constructor parameters if needed
-  constructor() {
-    // use super('Compontent name', true) if you want your compontent to be initialized after image are loaded
-    super('Compontent name', false);
-
-    // to some stuff
-  }
-
-  public async init(): Promise<void> {
-    await super.init();
-    
-    // to some stuff
-
-    this.success();
-  }
-
-  // add methods here
-}</code></pre>
-      <h5>index.ts</h5>
-      <pre class="highlight"><code class="ts">import { MyFirstCompontent } from '../components/MyFirstCompontent';
-        
-(new MyFirstCompontent()).init();</code></pre>
         </section>
         <section id="section-components-examples" class="section col-12 mb-5">
           <h1 class="mb-3">Components examples</h1>
