@@ -1,5 +1,5 @@
-import { Collection } from '../Collection';
-import { Selector, Dimensions } from '../Collection/Types';
+import { Collection } from './Collection';
+import { Selector, Dimensions } from './Collection/Types';
 
 export interface GraphicEngineOptions {
   width?: number,

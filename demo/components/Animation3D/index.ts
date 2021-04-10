@@ -1,6 +1,8 @@
-import { GraphicEngineOptions } from "../../../src/GraphicEngine/GraphicEngine";
-import { Selector } from '../../../src/Collection/Types';
-import { GraphicEngine3D } from '../../../src/GraphicEngine/GraphicEngine3D';
+import { GraphicEngine, GraphicEngineOptions } from "../../../src/GraphicEngine";
+import { Selector, Dimensions} from '../../../src/Collection/Types';
+import { WebGLRenderer } from 'three/src/renderers/WebGLRenderer';
+import { Scene } from 'three/src/scenes/Scene';
+import { PerspectiveCamera } from 'three/src/cameras/PerspectiveCamera';
 import { BoxGeometry } from 'three/src/geometries/BoxGeometry';
 import { MeshBasicMaterial } from 'three/src/materials/MeshBasicMaterial';
 import { Mesh } from 'three/src/objects/Mesh';
@@ -8,12 +10,40 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Component } from '../../../src/Component';
 import { Color } from "three";
 
-class Animation extends GraphicEngine3D {
+class Animation extends GraphicEngine {
+  private scene: Scene;
+  private renderer: WebGLRenderer;
+  private camera: PerspectiveCamera;
   private cube: Mesh;
   private controls: OrbitControls;
 
   constructor(selector: Selector, options?: GraphicEngineOptions) {
     super(selector, options);
+
+    if (this.length == 0) return;
+
+    this.scene = new Scene();
+    this.renderer = new WebGLRenderer({
+      canvas: this.get(0),
+      antialias: this.options.antialias,
+      alpha: this.options.alpha
+    });
+
+    this.camera = new PerspectiveCamera(75, this.options.width / this.options.height, 0.1, 1000);
+
+    this.renderer.setSize(this.options.width, this.options.height);
+
+    this.setup();
+  }
+
+  public resize(dimensions: Dimensions) {
+    super.resize(dimensions);
+
+    if (this.camera) {
+      this.camera.aspect = this.options.width / this.options.height
+      this.camera.updateProjectionMatrix()
+      this.renderer.setSize(this.options.width, this.options.height);
+    }
   }
 
   public setup() {
@@ -39,6 +69,7 @@ class Animation extends GraphicEngine3D {
   }
 
   public draw() {
+    if (this.renderer) this.renderer.render(this.scene, this.camera);
   }
 }
 

@@ -1,9 +1,10 @@
-import { GraphicEngineOptions } from "../../../src/GraphicEngine/GraphicEngine";
-import { Selector } from '../../../src/Collection/Types';
-import { GraphicEngine2D } from "../../../src/GraphicEngine/GraphicEngine2D";
+import { Selector, Dimensions } from '../../../src/Collection/Types';
+import { GraphicEngine, GraphicEngineOptions} from "../../../src/GraphicEngine";
 import { Component } from '../../../src/Component';
 
-class Animation extends GraphicEngine2D {
+class Animation extends GraphicEngine {
+  private context: CanvasRenderingContext2D;
+  private bufferDimensions: Dimensions;
   private imageData: ImageData;
   private buffer: Uint32Array;
   private alphaLimit: number;
@@ -11,6 +12,23 @@ class Animation extends GraphicEngine2D {
 
   constructor(selector: Selector, options?: GraphicEngineOptions) {
     super(selector, options);
+
+    if (this.length == 0) return;
+
+    this.context = this.get(0).getContext('2d', {
+      alpha: this.options.alpha
+    });
+
+    this.setup();
+  }
+
+  public resize(dimensions: Dimensions) {
+    super.resize(dimensions);
+
+    this.bufferDimensions = {
+      width: this.options.width * <number>this.options.pixelRatio,
+      height: this.options.height * <number>this.options.pixelRatio
+    }
   }
 
   public setup() {
@@ -32,7 +50,8 @@ class Animation extends GraphicEngine2D {
     }, 40);
   }
 
-  public animate() {
+  public clear () {
+    if (this.options.clear && this.context) this.context.clearRect(0, 0, this.bufferDimensions.width, this.bufferDimensions.height);
   }
 
   public draw() {

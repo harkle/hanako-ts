@@ -793,7 +793,7 @@ $('#pause-audio').on('click', () => {
 });</code></pre>
 
           <h2 class="mb-3" id="graphicengine">Graphic Engine</h2>
-          <p><code>GraphicEngine</code> offers a way to create canvas animation with <code>GraphiEngine2D</code> class or with Three.js using <code>GraphigEngine3D</code> class.</p>
+          <p><code>GraphicEngine</code> offers a way to create canvas animation or work with Three.js.</p>
           <p>It offers methos such as <code>setup()</code>, <code>animate()</code>, <code>draw()</code> to place your code.</p>
           <h4>Canvas 2D</h4>
 
@@ -802,12 +802,13 @@ $('#pause-audio').on('click', () => {
           <pre class="highlight"><code class="html">&lt;canvas id="canvas-2d"&gt;&lt;/canvas&gt;</code></pre>
 
           <h5>Animation2D/index.ts</h5>
-          <pre class="highlight"><code class="ts">import { GraphicEngineOptions } from "../../../src/GraphicEngine/GraphicEngine";
-import { Selector } from '../../../src/Collection/Types';
-import { GraphicEngine2D } from "../../../src/GraphicEngine/GraphicEngine2D";
+          <pre class="highlight"><code class="ts">import { Selector, Dimensions } from '../../../src/Collection/Types';
+import { GraphicEngine, GraphicEngineOptions} from "../../../src/GraphicEngine";
 import { Component } from '../../../src/Component';
 
-class Animation extends GraphicEngine2D {
+class Animation extends GraphicEngine {
+  private context: CanvasRenderingContext2D;
+  private bufferDimensions: Dimensions;
   private imageData: ImageData;
   private buffer: Uint32Array;
   private alphaLimit: number;
@@ -815,6 +816,23 @@ class Animation extends GraphicEngine2D {
 
   constructor(selector: Selector, options?: GraphicEngineOptions) {
     super(selector, options);
+
+    if (this.length == 0) return;
+
+    this.context = this.get(0).getContext('2d', {
+      alpha: this.options.alpha
+    });
+
+    this.setup();
+  }
+
+  public resize(dimensions: Dimensions) {
+    super.resize(dimensions);
+
+    this.bufferDimensions = {
+      width: this.options.width * <number>this.options.pixelRatio,
+      height: this.options.height * <number>this.options.pixelRatio
+    }
   }
 
   public setup() {
@@ -836,7 +854,8 @@ class Animation extends GraphicEngine2D {
     }, 40);
   }
 
-  public animate() {
+  public clear () {
+    if (this.options.clear && this.context) this.context.clearRect(0, 0, this.bufferDimensions.width, this.bufferDimensions.height);
   }
 
   public draw() {
@@ -874,9 +893,11 @@ export class Animation2D extends Component {
           <pre class="highlight"><code class="html">&lt;canvas id="canvas-3d"&gt;&lt;/canvas&gt;</code></pre>
 
           <h5>Animation3D/index.ts</h5>
-          <pre class="highlight"><code class="ts">import { GraphicEngineOptions } from "../../../src/GraphicEngine/GraphicEngine";
-import { Selector } from '../../../src/Collection/Types';
-import { GraphicEngine3D } from '../../../src/GraphicEngine/GraphicEngine3D';
+          <pre class="highlight"><code class="ts">import { GraphicEngine, GraphicEngineOptions } from "../../../src/GraphicEngine";
+import { Selector, Dimensions} from '../../../src/Collection/Types';
+import { WebGLRenderer } from 'three/src/renderers/WebGLRenderer';
+import { Scene } from 'three/src/scenes/Scene';
+import { PerspectiveCamera } from 'three/src/cameras/PerspectiveCamera';
 import { BoxGeometry } from 'three/src/geometries/BoxGeometry';
 import { MeshBasicMaterial } from 'three/src/materials/MeshBasicMaterial';
 import { Mesh } from 'three/src/objects/Mesh';
@@ -884,12 +905,40 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Component } from '../../../src/Component';
 import { Color } from "three";
 
-class Animation extends GraphicEngine3D {
+class Animation extends GraphicEngine {
+  private scene: Scene;
+  private renderer: WebGLRenderer;
+  private camera: PerspectiveCamera;
   private cube: Mesh;
   private controls: OrbitControls;
 
   constructor(selector: Selector, options?: GraphicEngineOptions) {
     super(selector, options);
+
+    if (this.length == 0) return;
+
+    this.scene = new Scene();
+    this.renderer = new WebGLRenderer({
+      canvas: this.get(0),
+      antialias: this.options.antialias,
+      alpha: this.options.alpha
+    });
+
+    this.camera = new PerspectiveCamera(75, this.options.width / this.options.height, 0.1, 1000);
+
+    this.renderer.setSize(this.options.width, this.options.height);
+
+    this.setup();
+  }
+
+  public resize(dimensions: Dimensions) {
+    super.resize(dimensions);
+
+    if (this.camera) {
+      this.camera.aspect = this.options.width / this.options.height
+      this.camera.updateProjectionMatrix()
+      this.renderer.setSize(this.options.width, this.options.height);
+    }
   }
 
   public setup() {
@@ -915,6 +964,7 @@ class Animation extends GraphicEngine3D {
   }
 
   public draw() {
+    if (this.renderer) this.renderer.render(this.scene, this.camera);
   }
 }
 
