@@ -43,7 +43,7 @@ export class Test extends Component {
       console.log(item);
 
       let separator = (index < manipulationDemoElement.length - 1) ? ', ' : '<br>';
-      this.log('manipulation', item, separator);
+      this.log('manipulation', item, '', separator);
     });
 
     console.log('%c.each((item: Collection) => { ... })', 'color: #ff9900');
@@ -52,13 +52,18 @@ export class Test extends Component {
       console.log(item);
 
       let separator = (index < manipulationDemoElement.length - 1) ? ', ' : '<br>';
-      this.log('manipulation', item, separator);
+      this.log('manipulation', item, '', separator);
     });
 
     console.log('%c.get(0)', 'color: #ff9900');
     this.log('manipulation', '$(\'#manipulation-demo *\').get(0)', '', '\t\t\t\t');
     console.log(manipulationDemoElement.get(0));
     this.log('manipulation', manipulationDemoElement.get(0), '', '<br>');
+
+    console.log('%c.eq(0)', 'color: #ff9900');
+    this.log('manipulation', '$(\'#manipulation-demo *\').eq(0)', '', '\t\t\t\t\t');
+    console.log(manipulationDemoElement.eq(0));
+    this.log('manipulation', manipulationDemoElement.eq(0), '', '<br>');
 
     console.log('%c.add($(\'#selector-demo\'))', 'color: #ff9900');
     this.log('manipulation', '$(\'#manipulation-demo *\').add($(\'#selector-demo\').get(0))', '', '\t');
@@ -86,6 +91,16 @@ export class Test extends Component {
     console.log(traversingnDemoElement.next());
     this.log('traversing', traversingnDemoElement.next(), '', '<br>');
 
+    console.log('%c.first()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo span\').first()', '', '\t\t');
+    console.log($('#traversing-demo span').first());
+    this.log('traversing', $('#traversing-demo span').first(), '', '<br>');
+
+    console.log('%c.last()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo span\').last()', '', '\t\t');
+    console.log($('#traversing-demo span').last());
+    this.log('traversing', $('#traversing-demo span').last(), '', '<br>');
+
     console.log('%c.parent()', 'color: #ff9900');
     this.log('traversing', '$(\'#traversing-demo .second\').parent()', '', '\t\t');
     console.log(traversingnDemoElement.parent());
@@ -105,13 +120,18 @@ export class Test extends Component {
     // HTML
     console.groupCollapsed('HTML demo');
 
-    this.log('html', '$(\'#html-demo .remove\').remove()', '', '\t\t\t');
-    console.log($('#html-demo .remove[data-id="1"]').remove());
-    this.log('html', $('#html-demo .remove[data-id="2"]').remove(), '', '<br>');
+    this.log('html', '$(\'#html-demo > *\').clone()', '', '\t\t\t\t');
+    console.log($('#html-demo > *').clone());
+    this.log('html', $('#html-demo > *').clone(), '', '<br>');
 
     this.log('html', '$(\'#html-demo .empty\').empty()', '', '\t\t\t\t');
     console.log($('#html-demo .empty').empty());
     this.log('html', $('#html-demo .empty').empty(), '', '<br>');
+
+    this.log('html', '$(\'#html-demo .remove\').remove()', '', '\t\t\t');
+    console.log($('#html-demo .remove[data-id="1"]').remove());
+    this.log('html', $('#html-demo .remove[data-id="2"]').remove(), '', '<br>');
+
 
     this.log('html', '$(\'#html-demo .prepend\').prepend($(\'.to-prepend\'))', '', '\t');
     console.log($('#html-demo .prepend').prepend($('.to-prepend')));

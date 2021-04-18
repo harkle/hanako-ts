@@ -76,11 +76,19 @@ export class Core implements Iterable<Elem> {
    * 
    * @param index Index of the element in the collection
    */
-  public get(index?: number): Elem {
-
-    index = Number(index);
-
+  public get(index: number): Elem {
     return this.elements[index < 0 ? index + this.elements.length : index];
+  };
+
+  /**
+   * Return a new collection containing element at the specified index.
+   *
+   * @category Collection 
+  * 
+  * @param index Index of the element in the collection
+  */
+  public eq(index: number): Collection {
+    return new Collection(this.get(index));
   };
 
   /**

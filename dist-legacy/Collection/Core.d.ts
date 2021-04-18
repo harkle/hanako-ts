@@ -44,7 +44,15 @@ export declare class Core implements Iterable<Elem> {
      *
      * @param index Index of the element in the collection
      */
-    get(index?: number): Elem;
+    get(index: number): Elem;
+    /**
+     * Return a new collection containing element at the specified index.
+     *
+     * @category Collection
+    *
+    * @param index Index of the element in the collection
+    */
+    eq(index: number): Collection;
     /**
      * Add an *Elem* to the collection
      *

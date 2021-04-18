@@ -159,6 +159,7 @@ const element3: Collection = $(anOtherHTMLElement);</code></pre>
 $('selector').forEach((item: Elem) => { ... }); // looping collection's item as Elem
 $('selector').each((item: Collection) => { ... }); // looping collection's item as Collection
 $('selector').get(index); // get a single Elem
+$('selector').eq(index); // get a single element as Collection
 $('selector').add(item);  // add a new Elem
 $('selector').search('selector'); // search of element matching selector in collection</code></pre>
 
@@ -177,8 +178,10 @@ $('selector').search('selector'); // search of element matching selector in coll
           <h2 class="mt-5 mb-3" id="#traversing">Traversing</h2>
           <p><code>Collection</code> offers various functions to traverse DOM nodes</p>
           <pre class="highlight"><code class="ts">$('selector').prev(); // get previous element of first element in collection
-$('selector').next(); // get next element of first element in collection
-$('selector').parent(); // get parent element of first element in collection
+$('selector').next(); // get next element of each elements in collection
+$('selector').parent(); // get parent element of each elements in collection
+$('selector').first(); // get the first element in collection
+$('selector').last(); // get lest element of in collection
 $('selector').parents('selector'); // get parents matching selector of first element in collection
 $('selector').find('selector'); // get descendents marching selector of first element in collection</code></pre>
 
@@ -199,7 +202,8 @@ $('selector').find('selector'); // get descendents marching selector of first el
 
           <h2 class="mt-5 mb-3" id="html">HTML</h2>
           <p><code>Collection</code> offers various functions to manipulate HTML nodes</p>
-          <pre class="highlight"><code class="ts">$('selector').remove(); // detach all elements in collection from DOM
+          <pre class="highlight"><code class="ts">$('selector').clone(); // clone all elements in collection
+$('selector').remove(); // detach all elements in collection from DOM
 $('selector').empty(); // empty all elements in collection
 $('selector').prepend(item); // prepend a element to the first element in collection
 $('selector').append(item); // append a element to the first element in collection

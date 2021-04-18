@@ -9,21 +9,28 @@ export declare class HTML extends Traversing {
      * @category HTML manipulation
      *
      */
-    remove(): Collection;
+    remove(): this;
     /**
      * Clear all DOM children of the *Elem*
      *
      * @category HTML manipulation
      *
      */
-    empty(): Collection;
+    empty(): this;
+    /**
+     * Return a clone of the collection
+     *
+     * @category HTML manipulation
+     *
+     */
+    clone(): Collection;
     /**
      * Insert content, specified by the parameter, to the beginning of each element in the collection
      *
      * @category HTML manipulation
      *
      */
-    prepend(itemsArray: Collection | Collection[]): Collection;
+    prepend(itemsArray: Collection | Collection[]): this;
     /**
      * Insert content, specified by the parameter, to the end of each element in the collection
      *

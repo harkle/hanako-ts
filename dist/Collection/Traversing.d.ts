@@ -4,25 +4,39 @@ import { Selector } from './Types';
 export declare class Traversing extends CSS {
     constructor(selector?: Selector);
     /**
-     * Return the previous DOM element for each *Elem* in the collection
+     * Return the previous element for each *Elem* in the collection
      *
      * @category Traversing
      */
     prev(): Collection;
     /**
-     * Return the previous DOM element for each *Elem* in the collection
+     * Return the previous element for each *Elem* in the collection
      *
      * @category Traversing
      */
     next(): Collection;
     /**
-     * Return the parent DOM element for each *Elem* in the collection
+     * Return the first element in collection
+     *
+     * @category Traversing
+     * @returns Collection
+     */
+    first(): Collection;
+    /**
+     * Return the last element in collection
+     *
+     * @category Traversing
+     * @returns Collection
+     */
+    last(): Collection;
+    /**
+     * Return the parent element for each *Elem* in the collection
      *
      * @category Traversing
      */
     parent(): Collection;
     /**
-     * Search for a parent DOM element matching the *selector*
+     * Search for a parent element matching the *selector*
      *
      * @category Traversing
      *
@@ -30,7 +44,7 @@ export declare class Traversing extends CSS {
      */
     parents(selector?: string): Collection;
     /**
-     * Search of DOM children matching the *selector*
+     * Search of children matching the *selector*
      *
      * @category Traversing
      *

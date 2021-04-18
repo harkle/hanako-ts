@@ -1,4 +1,5 @@
 import { Traversing } from './Traversing';
+import { Collection } from '../Collection';
 export class HTML extends Traversing {
     constructor(selector) {
         super(selector);
@@ -29,6 +30,19 @@ export class HTML extends Traversing {
         return this;
     }
     /**
+     * Return a clone of the collection
+     *
+     * @category HTML manipulation
+     *
+     */
+    clone() {
+        let collection = new Collection();
+        this.elements.forEach((item) => {
+            collection.add(item.cloneNode(true));
+        });
+        return collection;
+    }
+    /**
      * Insert content, specified by the parameter, to the beginning of each element in the collection
      *
      * @category HTML manipulation
@@ -39,6 +53,8 @@ export class HTML extends Traversing {
             itemsArray = [itemsArray];
         itemsArray.forEach((items) => {
             items.forEach((item) => {
+                if (this.elements.length == 0)
+                    return;
                 this.elements[0].insertBefore(item, this.elements[0].firstChild);
             });
         });
@@ -55,6 +71,8 @@ export class HTML extends Traversing {
             itemsArray = [itemsArray];
         itemsArray.forEach((items) => {
             items.forEach((item) => {
+                if (this.elements.length == 0)
+                    return;
                 this.elements[0].appendChild(item);
             });
         });

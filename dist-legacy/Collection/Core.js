@@ -64,8 +64,18 @@ export class Core {
      * @param index Index of the element in the collection
      */
     get(index) {
-        index = Number(index);
         return this.elements[index < 0 ? index + this.elements.length : index];
+    }
+    ;
+    /**
+     * Return a new collection containing element at the specified index.
+     *
+     * @category Collection
+    *
+    * @param index Index of the element in the collection
+    */
+    eq(index) {
+        return new Collection(this.get(index));
     }
     ;
     /**

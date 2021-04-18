@@ -13,12 +13,12 @@ export class HTML extends Traversing {
    * @category HTML manipulation
    * 
    */
-  public remove(): Collection {
+  public remove(): this {
     this.elements.forEach((item: Elem) => {
       item.remove();
     });
 
-    return <Collection><unknown>this;
+    return this;
   }
 
   /**
@@ -27,13 +27,29 @@ export class HTML extends Traversing {
    * @category HTML manipulation
    * 
    */
-  public empty(): Collection {
+  public empty(): this {
     this.elements.forEach((item: Elem) => {
       while (item.firstChild)
         item.removeChild(item.firstChild);
     });
 
-    return <Collection><unknown>this;
+    return this;
+  }
+
+  /**
+   * Return a clone of the collection
+   * 
+   * @category HTML manipulation
+   * 
+   */
+  public clone(): Collection {
+    let collection = new Collection();
+
+    this.elements.forEach((item: Elem) => {
+      collection.add(<Elem>item.cloneNode(true));
+    });
+
+    return collection;
   }
 
   /**
@@ -42,16 +58,17 @@ export class HTML extends Traversing {
    * @category HTML manipulation
    * 
    */
-  public prepend(itemsArray: Collection | Collection[]): Collection {
+  public prepend(itemsArray: Collection | Collection[]): this {
     if (!Array.isArray(itemsArray)) itemsArray = [itemsArray];
 
     itemsArray.forEach((items: Collection) => {
       items.forEach((item: Elem) => {
+        if (this.elements.length == 0) return;
         this.elements[0].insertBefore(item, this.elements[0].firstChild);
       });
     });
 
-    return <Collection><unknown>this;
+    return this;
   }
 
   /**
@@ -62,9 +79,10 @@ export class HTML extends Traversing {
    */
   public append(itemsArray: Collection | Collection[]): this {
     if (!Array.isArray(itemsArray)) itemsArray = [itemsArray];
-    
+
     itemsArray.forEach((items: Collection) => {
       items.forEach((item: Elem) => {
+        if (this.elements.length == 0) return;
         this.elements[0].appendChild(item);
       });
     });

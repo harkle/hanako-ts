@@ -8,7 +8,7 @@ export class Traversing extends CSS {
   }
 
   /**
-   * Return the previous DOM element for each *Elem* in the collection
+   * Return the previous element for each *Elem* in the collection
    * 
    * @category Traversing
    */
@@ -23,7 +23,7 @@ export class Traversing extends CSS {
   }
 
   /**
-   * Return the previous DOM element for each *Elem* in the collection
+   * Return the previous element for each *Elem* in the collection
    * 
    * @category Traversing
    */
@@ -38,7 +38,27 @@ export class Traversing extends CSS {
   }
 
   /**
-   * Return the parent DOM element for each *Elem* in the collection
+   * Return the first element in collection
+   * 
+   * @category Traversing
+   * @returns Collection
+   */
+  public first(): Collection {
+    return new Collection(this.elements[0]);
+  }
+
+  /**
+   * Return the last element in collection
+   * 
+   * @category Traversing
+   * @returns Collection
+   */
+  public last(): Collection {
+    return new Collection(this.elements[this.elements.length - 1]);
+  }
+
+  /**
+   * Return the parent element for each *Elem* in the collection
    * 
    * @category Traversing
    */
@@ -47,11 +67,11 @@ export class Traversing extends CSS {
 
     if (this.elements.length > 0) collection = new Collection(this.get(0).parentNode);
 
-    return collection 
+    return collection
   }
 
   /**
-   * Search for a parent DOM element matching the *selector*
+   * Search for a parent element matching the *selector*
    * 
    * @category Traversing
    * 
@@ -78,7 +98,7 @@ export class Traversing extends CSS {
   }
 
   /**
-   * Search of DOM children matching the *selector*
+   * Search of children matching the *selector*
    * 
    * @category Traversing
    * 
