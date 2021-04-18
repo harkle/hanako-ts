@@ -1,14 +1,14 @@
 {
   "name": "hanako-ts",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Web quick and dirty framework to manage everyday frontend web development challenges.",
   "homepage": "https://github.com/harkle/hanako-ts",
   "bugs": {
     "url": "https://github.com/harkle/hanako-ts/issues"
   },
-  "files": [ 
+  "files": [
     "dist/*",
-    "dist-legacy/*" 
+    "dist-legacy/*"
   ],
   "devDependencies": {
     "@popperjs/core": "^2.9.1",
