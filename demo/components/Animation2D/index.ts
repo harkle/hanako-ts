@@ -46,7 +46,7 @@ class Animation extends GraphicEngine {
 
     setInterval(() => {
       let len: number = this.buffer.length - 1;
-      while (len--) this.buffer[len] = Math.random() < this.alphaLimit ? 0 : 0xffffffff;
+      while (len--) this.buffer[len] = Math.random() < this.alphaLimit ? 0xff000000 : 0x0000000;
     }, 40);
   }
 
@@ -68,7 +68,7 @@ export class Animation2D extends Component {
   public async init(): Promise<void> {
     await super.init();
 
-    const canvas2D = new Animation('#canvas-2d', { width: 640, height: 480, pixelRatio: 1 });
+    const canvas2D = new Animation('#canvas-2d', {alpha: true, clear: false, width: 640, height: 480, pixelRatio: 1 });
 
     this.success();
   }
