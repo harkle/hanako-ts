@@ -187,14 +187,16 @@ $('selector').find('selector'); // get descendents marching selector of first el
 
           <h4>Examples</h4>
           <pre class="highlight"><code class="html">&lt;p id="traversing-demo"&gt;
-  &lt;span class="first">First&lt;/span&gt;
+  &lt;span class="first">
+    &lt;em&gt;First&lt;/em&gt;
+  &lt;/span&gt;
   &lt;span class="second"&gt;
     &lt;em&gt;Second&lt;/em&gt;
   &lt;/span&gt;
   &lt;span class="third"&gt;Third&lt;/span&gt;
 &lt;/p&gt;</code></pre>
           <div class="bd-example mb-3">
-            <p id="traversing-demo"><span class="first">First</span> <span class="second"><em>Second</em></span> <span class="third">Third</span></p>
+            <p id="traversing-demo"><span class="first"><em>First</em></span> <span class="second"><em>Second</em></span> <span class="third">Third</span></p>
           </div>
           <div class="bd-example terminal mb-3">
             <pre><code id="traversing-console" class="nohighlight">Please open browser console and look at "Traversing demo" group for detailed console.log()<br></code></pre>

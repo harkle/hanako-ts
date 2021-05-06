@@ -112,9 +112,9 @@ export class Test extends Component {
     this.log('traversing', traversingnDemoElement.parents('.row'), '', '<br>');
 
     console.log('%c.find(\'em\')', 'color: #ff9900');
-    this.log('traversing', '$(\'#traversing-demo .second\').find(\'em\')', '', '\t');
-    console.log(traversingnDemoElement.find('em'));
-    this.log('traversing', traversingnDemoElement.find('em'), '', '<br>');
+    this.log('traversing', '$(\'#traversing-demo span\').find(\'em\')', '', '\t\t');
+    console.log($('#traversing-demo span').find('em'));
+    this.log('traversing', $('#traversing-demo span').find('em'), '', '<br>');
     console.groupEnd();
 
     // HTML

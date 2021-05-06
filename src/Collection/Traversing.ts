@@ -65,7 +65,9 @@ export class Traversing extends CSS {
   public parent(): Collection {
     var collection: Collection = new Collection();
 
-    if (this.elements.length > 0) collection = new Collection(this.get(0).parentNode);
+    this.forEach((item: Elem) => {
+      collection = new Collection(item.parentNode);
+    });
 
     return collection
   }
@@ -81,18 +83,18 @@ export class Traversing extends CSS {
     var collection: Collection = new Collection();
     if (this.elements.length == 0) return collection;
 
-    var current: Elem = this.elements[0];
+    this.forEach((item: Elem) => {
+      while (item.parentNode != null && item.parentNode != document.documentElement) {
+        let isToBeAdded: boolean = true;
+        if (selector) {
+          isToBeAdded = false;
+          if ((<Elem>item.parentNode).matches(selector)) isToBeAdded = true;
+        }
 
-    while (current.parentNode != null && current.parentNode != document.documentElement) {
-      let isToBeAdded: boolean = true;
-      if (selector) {
-        isToBeAdded = false;
-        if ((<Elem>current.parentNode).matches(selector)) isToBeAdded = true;
+        if (isToBeAdded) collection.add(<Elem>item.parentNode);
+        item = <Elem>item.parentNode;
       }
-
-      if (isToBeAdded) collection.add(<Elem>current.parentNode);
-      current = <Elem>current.parentNode;
-    }
+    });
 
     return collection;
   }
@@ -107,12 +109,13 @@ export class Traversing extends CSS {
   public find(selector: string): Collection {
     var collection: Collection = new Collection();
 
-    if (this.elements.length == 0) return collection;
 
-    var foundElements: NodeList = this.elements[0].querySelectorAll(selector);
+    this.forEach((item: Elem) => {
+      var foundElements: NodeList = item.querySelectorAll(selector);
 
-    foundElements.forEach((element: Node) => {
-      collection.add(<Elem>element);
+      foundElements.forEach((element: Node) => {
+        collection.add(<Elem>element);
+      });
     });
 
     return collection;
