@@ -36,5 +36,6 @@ export declare class CSS extends Core {
     css(name: {
         [property: string]: string | number;
     }): this;
-    css(name: string, value?: string, priority?: '' | 'important'): this;
+    css(name: string, value?: string | number, priority?: '' | 'important'): this;
+    private prepareCSSValue;
 }

@@ -61,11 +61,11 @@ export class CSS extends Core {
                     priority = '';
                 if (typeof name == 'object') {
                     for (let property in name) {
-                        item.style.setProperty(property, name[property].toString(), priority);
+                        item.style.setProperty(property, this.prepareCSSValue(property, name[property]), priority);
                     }
                 }
                 else {
-                    item.style.setProperty(name, value, priority);
+                    item.style.setProperty(name, this.prepareCSSValue(name, value), priority);
                 }
             });
             return this;
@@ -76,5 +76,23 @@ export class CSS extends Core {
             let styles = window.getComputedStyle(this.elements[0]);
             return styles.getPropertyValue(name);
         }
+    }
+    /*
+     * Auto convert px value for specific properties
+     */
+    prepareCSSValue(property, value) {
+        let computedValue = value.toString();
+        if (['width', 'height',
+            'min-width', 'max-width',
+            'min-height', 'max-height',
+            'top', 'right', 'bottom', 'left',
+            'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+            'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+            'border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+            'font-size', 'line-height'
+        ].includes(property)) {
+            computedValue = value + 'px';
+        }
+        return computedValue;
     }
 }

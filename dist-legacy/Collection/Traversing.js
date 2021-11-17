@@ -53,8 +53,9 @@ export class Traversing extends CSS {
      */
     parent() {
         var collection = new Collection();
-        if (this.elements.length > 0)
-            collection = new Collection(this.get(0).parentNode);
+        this.forEach((item) => {
+            collection = new Collection(item.parentNode);
+        });
         return collection;
     }
     /**
@@ -68,18 +69,19 @@ export class Traversing extends CSS {
         var collection = new Collection();
         if (this.elements.length == 0)
             return collection;
-        var current = this.elements[0];
-        while (current.parentNode != null && current.parentNode != document.documentElement) {
-            let isToBeAdded = true;
-            if (selector) {
-                isToBeAdded = false;
-                if (current.parentNode.matches(selector))
-                    isToBeAdded = true;
+        this.forEach((item) => {
+            while (item.parentNode != null && item.parentNode != document.documentElement) {
+                let isToBeAdded = true;
+                if (selector) {
+                    isToBeAdded = false;
+                    if (item.parentNode.matches(selector))
+                        isToBeAdded = true;
+                }
+                if (isToBeAdded)
+                    collection.add(item.parentNode);
+                item = item.parentNode;
             }
-            if (isToBeAdded)
-                collection.add(current.parentNode);
-            current = current.parentNode;
-        }
+        });
         return collection;
     }
     /**
@@ -91,11 +93,11 @@ export class Traversing extends CSS {
      */
     find(selector) {
         var collection = new Collection();
-        if (this.elements.length == 0)
-            return collection;
-        var foundElements = this.elements[0].querySelectorAll(selector);
-        foundElements.forEach((element) => {
-            collection.add(element);
+        this.forEach((item) => {
+            var foundElements = item.querySelectorAll(selector);
+            foundElements.forEach((element) => {
+                collection.add(element);
+            });
         });
         return collection;
     }
