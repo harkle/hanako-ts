@@ -132,14 +132,21 @@ export class Test extends Component {
     console.log($('#html-demo .remove[data-id="1"]').remove());
     this.log('html', $('#html-demo .remove[data-id="2"]').remove(), '', '<br>');
 
-
     this.log('html', '$(\'#html-demo .prepend\').prepend($(\'.to-prepend\'))', '', '\t');
     console.log($('#html-demo .prepend').prepend($('.to-prepend')));
     this.log('html', $('#html-demo .prepend'), '', '<br>');
 
     this.log('html', '$(\'#html-demo .append\').append($(\'.to-append\'))', '', '\t\t');
-    console.log($('#html-demo .append').prepend($('.to-append')));
+    console.log($('#html-demo .append').append($('.to-append')));
     this.log('html', $('#html-demo .append'), '', '<br>');
+
+    this.log('html', '$(\'#html-demo .before\').before($(\'.to-before\'))', '', '\t\t');
+    console.log($('#html-demo .before').before($('.to-before')));
+    this.log('html', $('#html-demo .before'), '', '<br>');
+
+    this.log('html', '$(\'#html-demo .after\').after($(\'.to-after\'))', '', '\t\t');
+    console.log($('#html-demo .after').after($('.to-after')));
+    this.log('html', $('#html-demo .after'), '', '<br>');
 
     this.log('html', '$(\'#html-demo .wrap\').wrap($(\'.wrapper\'))', '', '\t\t');
     console.log($('#html-demo .wrap').wrap($('.wrapper')));

@@ -116,7 +116,7 @@ export class CSS extends Core {
          'border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
          'font-size', 'line-height'
         ].includes(property)) {
-      computedValue = value + 'px';
+      computedValue = (isNaN(<number>value) ?  <string>value : value + 'px');
     }
 
     return computedValue;

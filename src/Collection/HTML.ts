@@ -91,6 +91,48 @@ export class HTML extends Traversing {
   }
 
   /**
+   * Add an element before specified element
+   *
+   * @category HTML manipulation
+   */
+  public before(itemsArray: Collection | Collection[]): this {
+    if (!Array.isArray(itemsArray)) itemsArray = [itemsArray];
+
+
+      itemsArray.forEach((items: Collection) => {
+        items.forEach((item: Elem) => {
+          if (this.elements.length == 0) return;
+
+          const parent = this.elements[0].parentNode;
+          if (parent) parent.insertBefore(item, this.elements[0]);
+        });
+      });
+
+    return this;
+  }
+
+  /**
+   * Add an element after specified element
+   *
+   * @category HTML manipulation
+   */
+   public after(itemsArray: Collection | Collection[]): this {
+    if (!Array.isArray(itemsArray)) itemsArray = [itemsArray];
+
+
+      itemsArray.forEach((items: Collection) => {
+        items.forEach((item: Elem) => {
+          if (this.elements.length == 0) return;
+
+          const parent = this.elements[0].parentNode;
+          if (parent) parent.insertBefore(item, this.elements[0].nextSibling);
+        });
+      });
+
+    return this;
+  }
+
+  /**
    * Wrap each element in the collection with specified element 
    * 
    * @category HTML manipulation

@@ -209,6 +209,8 @@ $('selector').remove(); // detach all elements in collection from DOM
 $('selector').empty(); // empty all elements in collection
 $('selector').prepend(item); // prepend a element to the first element in collection
 $('selector').append(item); // append a element to the first element in collection
+$('selector').after(item); // Add an element before specified element
+$('selector').before(item); // Add an element after specified element
 $('selector').wrap(item); // wrap all elements in collection with a the specified element
 $('selector').html(); // get the html content of the first element in collection
 $('selector').html('content'); // set the html content of all element in collection
@@ -231,16 +233,20 @@ $('selector').data('name', 'value'); // set the data attribute value of the firs
   &lt;div class=&quot;empty&quot;&gt;3: empty&lt;/div&gt;
   &lt;div class=&quot;prepend&quot;&gt;4: prepend&lt;/div&gt;
   &lt;div class=&quot;append&quot;&gt;5: append&lt;/div&gt;
-  &lt;div class=&quot;wrap&quot;&gt;6: wrap&lt;/div&gt;
-  &lt;div class=&quot;html&quot;&gt;7: html&lt;/div&gt;
-  &lt;div class=&quot;text&quot;&gt;8: text&lt;/div&gt;
-  &lt;div class=&quot;atr&quot; title=&quot;title attribute&quot; alt=&quot;attribute to remove&quot;&gt;9: attr&lt;/div&gt;
-  &lt;div class=&quot;data&quot; data-test=&quot;test dateset value&quot;&gt;10: data&lt;/div&gt;
+  &lt;div class=&quot;before&quot;&gt;6: before&lt;/div&gt;
+  &lt;div class=&quot;after&quot;&gt;7: after&lt;/div&gt;
+  &lt;div class=&quot;wrap&quot;&gt;8: wrap&lt;/div&gt;
+  &lt;div class=&quot;html&quot;&gt;9: html&lt;/div&gt;
+  &lt;div class=&quot;text&quot;&gt;10: text&lt;/div&gt;
+  &lt;div class=&quot;atr&quot; title=&quot;title attribute&quot; alt=&quot;attribute to remove&quot;&gt;11: attr&lt;/div&gt;
+  &lt;div class=&quot;data&quot; data-test=&quot;test dateset value&quot;&gt;12: data&lt;/div&gt;
 &lt;/p&gt;</code></pre>
           <div class="bd-example mb-3">
             <div id="html-demo">
               <strong class="to-prepend">prepend</strong>
               <strong class="to-append">append</strong>
+              <strong class="to-before">before</strong>
+              <strong class="to-after">after</strong>
               <div class="wrapper text-warning"></div>
               <div>1: nothing <span>Test</span></div>
               <div class="remove" data-id="1">2: remove</div>
@@ -248,11 +254,13 @@ $('selector').data('name', 'value'); // set the data attribute value of the firs
               <div class="empty">3: empty</div>
               <div class="prepend">4: prepend</div>
               <div class="append">5: append</div>
-              <div class="wrap">6: wrap</div>
-              <div class="html">7: html</div>
-              <div class="text">8: text</div>
-              <div class="atr" title="title attribute" alt="attribute to remove">9: attr</div>
-              <div class="data" data-test="test dateset value">10: data</div>
+              <div class="before">6: before</div>
+              <div class="after">7: after</div>
+              <div class="wrap">8: wrap</div>
+              <div class="html">9: html</div>
+              <div class="text">10: text</div>
+              <div class="atr" title="title attribute" alt="attribute to remove">11: attr</div>
+              <div class="data" data-test="test dateset value">12: data</div>
             </div>
           </div>
           <div class="bd-example terminal mb-3">

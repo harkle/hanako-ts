@@ -14,15 +14,16 @@ export class Events extends Dimensions {
    * @category Events
    * 
    */
-  public on(eventNames: string | Array<string>, callback: EventCallback): Collection;
-  public on(eventNames: string | Array<string>, selector: Selector, callback: EventCallback): Collection;
-  public on(eventNames: string | Array<string>, selector?: any, callback?: EventCallback): Collection {
+  public on(eventNames: string | Array<string>, callback: EventCallback, useCapture?: boolean): Collection;
+  public on(eventNames: string | Array<string>, selector: Selector, callback: EventCallback, useCapture?: boolean): Collection;
+  public on(eventNames: string | Array<string>, selector?: any, callback?: any, useCapture?: boolean): Collection {
     if (typeof eventNames == 'string') eventNames = [eventNames];
     if (typeof selector == 'function') callback = selector;
+    if (typeof selector == 'function') useCapture = callback;
 
     eventNames.forEach((eventName: string) => {
       this.forEach((item: Elem) => {
-        EventManager.add(item, eventName, selector, callback);
+        EventManager.add(item, eventName, selector, callback, useCapture);
       });
     });
 

@@ -12,7 +12,7 @@ function checkParents(items: Collection, eventTarget: EventTarget): Elem {
     }
 
     var parent: Node = (<Elem>eventTarget).parentNode;
-    while (parent !== document) {
+    while (parent !== document && parent) {
       if (item === parent) {
         realItem = item;
         return;
@@ -53,7 +53,7 @@ export class EventManager {
     return context;
   }
 
-  public static add(item: Selector, eventName: string, selector: Function | string, callback: Function) {
+  public static add(item: Selector, eventName: string, selector: Function | string, callback: Function, useCapture: boolean) {
     const context: string = EventManager.getContext(EventManager.uid(), item, selector) + eventName;
     
     EventManager.events[context] = function (event: Event) {
@@ -65,7 +65,7 @@ export class EventManager {
       }
     };
 
-    (<Elem>item).addEventListener(eventName, EventManager.events[context]);
+    (<Elem>item).addEventListener(eventName, EventManager.events[context], useCapture);
   }
 
   public static remove(item: Selector, eventName: string, selector: Function | string) {
