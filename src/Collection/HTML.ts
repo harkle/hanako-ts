@@ -98,7 +98,6 @@ export class HTML extends Traversing {
   public before(itemsArray: Collection | Collection[]): this {
     if (!Array.isArray(itemsArray)) itemsArray = [itemsArray];
 
-
       itemsArray.forEach((items: Collection) => {
         items.forEach((item: Elem) => {
           if (this.elements.length == 0) return;
@@ -118,7 +117,6 @@ export class HTML extends Traversing {
    */
    public after(itemsArray: Collection | Collection[]): this {
     if (!Array.isArray(itemsArray)) itemsArray = [itemsArray];
-
 
       itemsArray.forEach((items: Collection) => {
         items.forEach((item: Elem) => {

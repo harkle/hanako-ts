@@ -79,6 +79,44 @@ export class HTML extends Traversing {
         return this;
     }
     /**
+     * Add an element before specified element
+     *
+     * @category HTML manipulation
+     */
+    before(itemsArray) {
+        if (!Array.isArray(itemsArray))
+            itemsArray = [itemsArray];
+        itemsArray.forEach((items) => {
+            items.forEach((item) => {
+                if (this.elements.length == 0)
+                    return;
+                const parent = this.elements[0].parentNode;
+                if (parent)
+                    parent.insertBefore(item, this.elements[0]);
+            });
+        });
+        return this;
+    }
+    /**
+     * Add an element after specified element
+     *
+     * @category HTML manipulation
+     */
+    after(itemsArray) {
+        if (!Array.isArray(itemsArray))
+            itemsArray = [itemsArray];
+        itemsArray.forEach((items) => {
+            items.forEach((item) => {
+                if (this.elements.length == 0)
+                    return;
+                const parent = this.elements[0].parentNode;
+                if (parent)
+                    parent.insertBefore(item, this.elements[0].nextSibling);
+            });
+        });
+        return this;
+    }
+    /**
      * Wrap each element in the collection with specified element
      *
      * @category HTML manipulation

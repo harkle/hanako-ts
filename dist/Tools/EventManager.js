@@ -7,7 +7,7 @@ function checkParents(items, eventTarget) {
             return;
         }
         var parent = eventTarget.parentNode;
-        while (parent !== document) {
+        while (parent !== document && parent) {
             if (item === parent) {
                 realItem = item;
                 return;
@@ -39,7 +39,7 @@ export class EventManager {
         }
         return context;
     }
-    static add(item, eventName, selector, callback) {
+    static add(item, eventName, selector, callback, useCapture) {
         const context = EventManager.getContext(EventManager.uid(), item, selector) + eventName;
         EventManager.events[context] = function (event) {
             if (typeof selector == 'string') {
@@ -51,7 +51,7 @@ export class EventManager {
                 callback.call(this, event, new Collection(this));
             }
         };
-        item.addEventListener(eventName, EventManager.events[context]);
+        item.addEventListener(eventName, EventManager.events[context], useCapture);
     }
     static remove(item, eventName, selector) {
         const uid = (item !== document && item !== window) ? item.eventUID : 0;

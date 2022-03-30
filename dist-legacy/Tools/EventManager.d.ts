@@ -4,6 +4,6 @@ export declare class EventManager {
     private static events;
     private static uid;
     private static getContext;
-    static add(item: Selector, eventName: string, selector: Function | string, callback: Function): void;
+    static add(item: Selector, eventName: string, selector: Function | string, callback: Function, useCapture: boolean): void;
     static remove(item: Selector, eventName: string, selector: Function | string): void;
 }

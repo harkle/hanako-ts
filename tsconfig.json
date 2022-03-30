@@ -7,7 +7,7 @@
       "lib": ["es2020", "dom"]
   },
   "typedocOptions": {
-    "entryPoints": ["src/Collection.ts", "src/Tools/Helpers.ts", "src/Component.ts", "src/GraphicEngine/GraphicEngine.ts"],
+    "entryPoints": ["src/Collection.ts", "src/Tools/Helpers.ts", "src/Component.ts", "src/GraphicEngine.ts"],
     "out": "docs"
   }
 }

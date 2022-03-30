@@ -9,8 +9,8 @@ export declare class Events extends Dimensions {
      * @category Events
      *
      */
-    on(eventNames: string | Array<string>, callback: EventCallback): Collection;
-    on(eventNames: string | Array<string>, selector: Selector, callback: EventCallback): Collection;
+    on(eventNames: string | Array<string>, callback: EventCallback, useCapture?: boolean): Collection;
+    on(eventNames: string | Array<string>, selector: Selector, callback: EventCallback, useCapture?: boolean): Collection;
     /**
      * Remove an event handler function for one or more events to the selected elements.
      *

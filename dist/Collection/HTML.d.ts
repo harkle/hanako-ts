@@ -39,6 +39,18 @@ export declare class HTML extends Traversing {
      */
     append(itemsArray: Collection | Collection[]): this;
     /**
+     * Add an element before specified element
+     *
+     * @category HTML manipulation
+     */
+    before(itemsArray: Collection | Collection[]): this;
+    /**
+     * Add an element after specified element
+     *
+     * @category HTML manipulation
+     */
+    after(itemsArray: Collection | Collection[]): this;
+    /**
      * Wrap each element in the collection with specified element
      *
      * @category HTML manipulation

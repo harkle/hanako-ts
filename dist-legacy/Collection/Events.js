@@ -4,14 +4,16 @@ export class Events extends Dimensions {
     constructor(selector) {
         super(selector);
     }
-    on(eventNames, selector, callback) {
+    on(eventNames, selector, callback, useCapture) {
         if (typeof eventNames == 'string')
             eventNames = [eventNames];
         if (typeof selector == 'function')
             callback = selector;
+        if (typeof selector == 'function')
+            useCapture = callback;
         eventNames.forEach((eventName) => {
             this.forEach((item) => {
-                EventManager.add(item, eventName, selector, callback);
+                EventManager.add(item, eventName, selector, callback, useCapture);
             });
         });
         return this;
