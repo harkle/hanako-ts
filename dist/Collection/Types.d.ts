@@ -11,7 +11,7 @@ export interface Dimensions {
     width?: number;
     height?: number;
 }
-declare type ElementHTML = HTMLElement & HTMLInputElement & HTMLImageElement & HTMLCanvasElement & HTMLAudioElement & Element & Node;
+declare type ElementHTML = HTMLElement & HTMLFormElement & HTMLInputElement & HTMLImageElement & HTMLCanvasElement & HTMLAudioElement & Element & Node;
 export interface Elem extends ElementHTML {
     eventUID: number;
 }
