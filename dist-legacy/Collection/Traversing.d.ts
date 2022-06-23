@@ -7,14 +7,34 @@ export declare class Traversing extends CSS {
      * Return the previous element for each *Elem* in the collection
      *
      * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
      */
-    prev(): Collection;
+    prev(selector?: string): Collection;
     /**
-     * Return the previous element for each *Elem* in the collection
+     * Return all previous elements for each *Elem* in the collection
      *
      * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
      */
-    next(): Collection;
+    prevAll(selector?: string): Collection;
+    /**
+     * Return the next element for each *Elem* in the collection
+     *
+     * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
+     */
+    next(selector?: string): Collection;
+    /**
+     * Return all next elements for each *Elem* in the collection
+     *
+     * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
+     */
+    nextAll(selector?: string): Collection;
     /**
      * Return the first element in collection
      *
@@ -33,13 +53,15 @@ export declare class Traversing extends CSS {
      * Return the parent element for each *Elem* in the collection
      *
      * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
      */
-    parent(): Collection;
+    parent(selector?: string): Collection;
     /**
      * Search for a parent element matching the *selector*
      *
      * @category Traversing
-     *
+     * @returns Collection
      * @param selector A css selector
      */
     parents(selector?: string): Collection;
@@ -47,8 +69,8 @@ export declare class Traversing extends CSS {
      * Search of children matching the *selector*
      *
      * @category Traversing
-     *
      * @param selector A css selector
+     * @returns Collection
      */
     find(selector: string): Collection;
 }

@@ -91,6 +91,16 @@ export class Test extends Component {
     console.log(traversingnDemoElement.next());
     this.log('traversing', traversingnDemoElement.next(), '', '<br>');
 
+    console.log('%c.prevAll()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo .third\').prevAll()', '', '\t\t');
+    console.log($('#traversing-demo .third').prevAll());
+    this.log('traversing', $('#traversing-demo .third').prevAll(), '', '<br>');
+
+    console.log('%c.nextAll()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo .first\').nextAll()', '', '\t\t');
+    console.log($('#traversing-demo .first').nextAll());
+    this.log('traversing', $('#traversing-demo .first').nextAll(), '', '<br>');
+
     console.log('%c.first()', 'color: #ff9900');
     this.log('traversing', '$(\'#traversing-demo span\').first()', '', '\t\t');
     console.log($('#traversing-demo span').first());

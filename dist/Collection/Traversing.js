@@ -1,5 +1,15 @@
 import { CSS } from './CSS';
 import { Collection } from '../Collection';
+function* _prevAll(item) {
+    while (item = item.previousElementSibling) {
+        yield item;
+    }
+}
+function* _nextAll(item) {
+    while (item = item.nextElementSibling) {
+        yield item;
+    }
+}
 export class Traversing extends CSS {
     constructor(selector) {
         super(selector);
@@ -8,23 +18,67 @@ export class Traversing extends CSS {
      * Return the previous element for each *Elem* in the collection
      *
      * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
      */
-    prev() {
+    prev(selector) {
         var collection = new Collection();
         this.forEach((item) => {
-            collection.add(item.previousElementSibling);
+            if (item.previousElementSibling) {
+                if (!selector || item.previousElementSibling.matches(selector))
+                    collection.add(item.previousElementSibling);
+            }
         });
         return collection;
     }
     /**
-     * Return the previous element for each *Elem* in the collection
+     * Return all previous elements for each *Elem* in the collection
      *
      * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
      */
-    next() {
+    prevAll(selector) {
         var collection = new Collection();
         this.forEach((item) => {
-            collection.add(item.nextElementSibling);
+            [..._prevAll(item)].forEach((sibling) => {
+                if (!selector || sibling.matches(selector))
+                    collection.add(sibling);
+            });
+        });
+        return collection;
+    }
+    /**
+     * Return the next element for each *Elem* in the collection
+     *
+     * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
+     */
+    next(selector) {
+        var collection = new Collection();
+        this.forEach((item) => {
+            if (item.nextElementSibling) {
+                if (!selector || item.nextElementSibling.matches(selector))
+                    collection.add(item.nextElementSibling);
+            }
+        });
+        return collection;
+    }
+    /**
+     * Return all next elements for each *Elem* in the collection
+     *
+     * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
+     */
+    nextAll(selector) {
+        var collection = new Collection();
+        this.forEach((item) => {
+            [..._nextAll(item)].forEach((sibling) => {
+                if (!selector || sibling.matches(selector))
+                    collection.add(sibling);
+            });
         });
         return collection;
     }
@@ -50,11 +104,14 @@ export class Traversing extends CSS {
      * Return the parent element for each *Elem* in the collection
      *
      * @category Traversing
+     * @param selector A css selector
+     * @returns Collection
      */
-    parent() {
+    parent(selector) {
         var collection = new Collection();
         this.forEach((item) => {
-            collection = new Collection(item.parentNode);
+            if (!selector || item.parentNode.matches(selector))
+                collection = new Collection(item.parentNode);
         });
         return collection;
     }
@@ -62,7 +119,7 @@ export class Traversing extends CSS {
      * Search for a parent element matching the *selector*
      *
      * @category Traversing
-     *
+     * @returns Collection
      * @param selector A css selector
      */
     parents(selector) {
@@ -71,13 +128,7 @@ export class Traversing extends CSS {
             return collection;
         this.forEach((item) => {
             while (item.parentNode != null && item.parentNode != document.documentElement) {
-                let isToBeAdded = true;
-                if (selector) {
-                    isToBeAdded = false;
-                    if (item.parentNode.matches(selector))
-                        isToBeAdded = true;
-                }
-                if (isToBeAdded)
+                if (!selector || item.parentNode.matches(selector))
                     collection.add(item.parentNode);
                 item = item.parentNode;
             }
@@ -88,8 +139,8 @@ export class Traversing extends CSS {
      * Search of children matching the *selector*
      *
      * @category Traversing
-     *
      * @param selector A css selector
+     * @returns Collection
      */
     find(selector) {
         var collection = new Collection();

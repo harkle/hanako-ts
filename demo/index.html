@@ -175,10 +175,12 @@ $('selector').search('selector'); // search of element matching selector in coll
           </div>
 
 
-          <h2 class="mt-5 mb-3" id="#traversing">Traversing</h2>
+          <h2 class="mt-5 mb-3" id="traversing">Traversing</h2>
           <p><code>Collection</code> offers various functions to traverse DOM nodes</p>
           <pre class="highlight"><code class="ts">$('selector').prev(); // get previous element of first element in collection
 $('selector').next(); // get next element of each elements in collection
+$('selector').nextPrev(); // get all previous elements of each elements in collection
+$('selector').nextAll(); // get all next elements of each elements in collection
 $('selector').parent(); // get parent element of each elements in collection
 $('selector').first(); // get the first element in collection
 $('selector').last(); // get lest element of in collection
