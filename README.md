@@ -26,6 +26,12 @@ You can also use inside your project `hanako-ts` directly from source.
 git clone https://github.com/harkle/hanako-ts.git
 ```
 
+### Update docs
+
+```sh
+npx typedoc src/index.ts src/Component.ts src/Framework.ts src/GraphicEngine.ts src/Collection.ts
+```
+
 ## Integrate in your project
 
 - Install via npm or Clone the repository in your project

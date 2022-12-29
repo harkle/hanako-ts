@@ -155,6 +155,27 @@ export class Traversing extends CSS {
   }
 
   /**
+   * Get direct children
+   * 
+   * @category Traversing
+   * @returns Collection
+   * @param selector A css selector
+   */
+  public children(selector?: string): Collection {
+    var collection: Collection = new Collection();
+    if (this.elements.length == 0) return collection;
+
+    this.forEach((item: Elem) => {
+      item.childNodes.forEach((childNode: Node) => {
+        if (childNode.nodeType === 3) return
+        if (!selector || (<Elem>childNode).matches(selector)) collection.add(<Elem>childNode);
+      });
+    });
+
+    return collection;
+  }
+
+  /**
    * Search of children matching the *selector*
    * 
    * @category Traversing
@@ -163,7 +184,6 @@ export class Traversing extends CSS {
    */
   public find(selector: string): Collection {
     var collection: Collection = new Collection();
-
 
     this.forEach((item: Elem) => {
       var foundElements: NodeList = item.querySelectorAll(selector);

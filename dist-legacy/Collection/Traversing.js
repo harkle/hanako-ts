@@ -136,6 +136,27 @@ export class Traversing extends CSS {
         return collection;
     }
     /**
+     * Get direct children
+     *
+     * @category Traversing
+     * @returns Collection
+     * @param selector A css selector
+     */
+    children(selector) {
+        var collection = new Collection();
+        if (this.elements.length == 0)
+            return collection;
+        this.forEach((item) => {
+            item.childNodes.forEach((childNode) => {
+                if (childNode.nodeType === 3)
+                    return;
+                if (!selector || childNode.matches(selector))
+                    collection.add(childNode);
+            });
+        });
+        return collection;
+    }
+    /**
      * Search of children matching the *selector*
      *
      * @category Traversing

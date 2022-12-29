@@ -125,7 +125,19 @@ export class Test extends Component {
     this.log('traversing', '$(\'#traversing-demo span\').find(\'em\')', '', '\t\t');
     console.log($('#traversing-demo span').find('em'));
     this.log('traversing', $('#traversing-demo span').find('em'), '', '<br>');
+    
+    const traversingnDemoElement2: Collection = $('#traversing-demo');
+    console.log('%c.children()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo\').children()', '', '\t\t');
+    console.log(traversingnDemoElement2.children(''));
+    this.log('traversing', traversingnDemoElement2.children(), '', '<br>');
+
+    console.log('%c.children()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo\').children(\'.second\')', '', '\t');
+    console.log(traversingnDemoElement2.children('.second, .third'));
+    this.log('traversing', traversingnDemoElement2.children('.second, .third'), '', '<br>');
     console.groupEnd();
+
 
     // HTML
     console.groupCollapsed('HTML demo');

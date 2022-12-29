@@ -66,6 +66,14 @@ export declare class Traversing extends CSS {
      */
     parents(selector?: string): Collection;
     /**
+     * Get direct children
+     *
+     * @category Traversing
+     * @returns Collection
+     * @param selector A css selector
+     */
+    children(selector?: string): Collection;
+    /**
      * Search of children matching the *selector*
      *
      * @category Traversing
