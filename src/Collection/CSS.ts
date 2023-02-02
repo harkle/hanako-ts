@@ -79,7 +79,7 @@ export class CSS extends Core {
   public css(name: { [property: string]: string | number }): this;
   public css(name: string, value?: string | number, priority?: '' | 'important'): this;
   public css(name: string | { [property: string]: string | number }, value?: string | number, priority?: '' | 'important'): string | this {
-    if (value || typeof name == 'object') {
+    if (value !== undefined || typeof name == 'object') {
       this.elements.forEach((item: Elem) => {
         if (!priority) priority = '';
 
@@ -119,6 +119,7 @@ export class CSS extends Core {
       computedValue = (isNaN(<number>value) ?  <string>value : value + 'px');
     }
 
+    console.log(computedValue)
     return computedValue;
   }
 }

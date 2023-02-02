@@ -55,7 +55,7 @@ export class CSS extends Core {
         return this;
     }
     css(name, value, priority) {
-        if (value || typeof name == 'object') {
+        if (value !== undefined || typeof name == 'object') {
             this.elements.forEach((item) => {
                 if (!priority)
                     priority = '';
@@ -93,6 +93,7 @@ export class CSS extends Core {
         ].includes(property)) {
             computedValue = (isNaN(value) ? value : value + 'px');
         }
+        console.log(computedValue);
         return computedValue;
     }
 }
