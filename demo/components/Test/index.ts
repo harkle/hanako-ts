@@ -136,8 +136,12 @@ export class Test extends Component {
     this.log('traversing', '$(\'#traversing-demo\').children(\'.second\')', '', '\t');
     console.log(traversingnDemoElement2.children('.second, .third'));
     this.log('traversing', traversingnDemoElement2.children('.second, .third'), '', '<br>');
-    console.groupEnd();
 
+    console.log('%c.index()', 'color: #ff9900');
+    this.log('traversing', '$(\'#traversing-demo .second\').index()', '', '\t\t');
+    console.log($('#traversing-demo .second').index());
+    this.log('traversing', $('#traversing-demo .second').index(), '', '<br>');
+    console.groupEnd();
 
     // HTML
     console.groupCollapsed('HTML demo');

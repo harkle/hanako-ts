@@ -81,4 +81,11 @@ export declare class Traversing extends CSS {
      * @returns Collection
      */
     find(selector: string): Collection;
+    /**
+     * Return the position of the first element within the Collection relative to its sibling elements
+     *
+     * @category Traversing
+     * @returns number
+     */
+    index(): number;
 }

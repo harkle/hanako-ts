@@ -173,4 +173,21 @@ export class Traversing extends CSS {
         });
         return collection;
     }
+    /**
+     * Return the position of the first element within the Collection relative to its sibling elements
+     *
+     * @category Traversing
+     * @returns number
+     */
+    index() {
+        const children = this.elements[0].parentNode.childNodes;
+        var index = 0;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i] == this.elements[0])
+                return index;
+            if (children[i].nodeType == 1)
+                index++;
+        }
+        return -1;
+    }
 }
