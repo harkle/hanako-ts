@@ -119,7 +119,6 @@ export class CSS extends Core {
       computedValue = (isNaN(<number>value) ?  <string>value : value + 'px');
     }
 
-    console.log(computedValue)
     return computedValue;
   }
 }

@@ -93,7 +93,6 @@ export class CSS extends Core {
         ].includes(property)) {
             computedValue = (isNaN(value) ? value : value + 'px');
         }
-        console.log(computedValue);
         return computedValue;
     }
 }
